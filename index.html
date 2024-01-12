@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate YAML File</title>
+</head>
+<body>
+    <h1>Metadata Generator</h1>
+
+    <form id="yamlForm">
+        <h2>Summary</h2>
+
+        <label for="why_was_it_collected">Why was it collected?</label><br>
+        <textarea id="why_was_it_collected" rows="4" cols="50"></textarea><br><br>
+
+        <label for="how_was_the_collection_executed">How was the collection executed?</label><br>
+        <textarea id="how_was_the_collection_executed" rows="4" cols="50"></textarea><br><br>
+
+        <label for="objectives">Objectives</label><br>
+        <textarea id="objectives" rows="4" cols="50"></textarea><br><br>
+
+        <label for="research_questions">Research Questions</label><br>
+        <textarea id="research_questions" rows="4" cols="50"></textarea><br><br>
+
+        <label for="experimental_plan">Experimental Plan</label><br>
+        <textarea id="experimental_plan" rows="4" cols="50"></textarea><br><br>
+
+        <label for="sample_selection_criteria">Sample Selection Criteria</label><br>
+        <textarea id="sample_selection_criteria" rows="4" cols="50"></textarea><br><br>
+
+        <label for="contact_person_name">Contact Person Name</label><br>
+        <input type="text" id="contact_person_name"><br><br>
+
+        <label for="contact_person_mail">Contact Person Mail</label><br>
+        <input type="text" id="contact_person_mail"><br><br>
+
+        <label for="producer_of_data">Producer of Data</label><br>
+        <input type="text" id="producer_of_data"><br><br>
+
+        <label for="data_area">Data Area</label><br>
+        <input type="text" id="data_area"><br><br>
+
+        <fieldset>
+            <legend>Data Type</legend>
+            <label><input type="checkbox" name="data_type" value="survey"> Survey</label><br>
+            <label><input type="checkbox" name="data_type" value="interviews"> Interviews</label><br>
+            <label><input type="checkbox" name="data_type" value="mobile network"> Mobile Network</label><br>
+            <label><input type="checkbox" name="data_type" value="itsg5"> ITSG5</label><br>
+            <label><input type="checkbox" name="data_type" value="lane markings"> Lane Markings</label><br>
+            <label><input type="checkbox" name="data_type" value="signage"> Signage</label><br>
+            <label><input type="checkbox" name="data_type" value="physical road infrastructure"> Physical Road Infrastructure</label><br>
+            <label><input type="checkbox" name="data_type" value="speed/acceleration"> Speed/Acceleration</label><br>
+            <label><input type="checkbox" name="data_type" value="video"> Video</label><br>
+            <label><input type="checkbox" name="data_type" value="pictures"> Pictures</label><br>
+            <label><input type="checkbox" name="data_type" value="gnss"> GNSS</label><br>
+            <label><input type="checkbox" name="data_type" value="lidar"> LiDAR</label><br>
+            <label><input type="checkbox" name="data_type" value="radar"> Radar</label><br>
+            <label><input type="checkbox" name="data_type" value="weather"> Weather</label><br>
+            <label><input type="checkbox" name="data_type" value="vehicle probe data"> Vehicle Probe Data</label><br>
+            <label><input type="checkbox" name="data_type" value="events"> Events</label><br>
+            <label><input type="checkbox" name="data_type" value="other"> Other</label><br>
+        </fieldset><br>
+
+        <label for="modi_use_case">MODI Use Case</label><br>
+        <select id="modi_use_case">
+            <option value="" disabled selected>Select an option</option> <!-- Placeholder option -->
+            <option value="UCNL">UCNL</option>
+            <option value="UCGE">UCGE</option>
+            <option value="UCSE">UCSE</option>
+            <option value="UCNO">UCNO</option>
+            <option value="UCCCAM">UCCCAM</option>
+            <option value="Other tasks">Other tasks</option>
+        </select><br><br>
+
+
+        <label for="dataset_size">Dataset Size</label><br>
+        <input type="text" id="dataset_size"><br><br>
+
+        <label for="dataset_example">Dataset Example</label><br>
+        <textarea id="dataset_example" rows="4" cols="50"></textarea><br><br>
+
+        <label for="datePicker">Select Date:</label>
+        <input type="date" id="datePicker"><br><br>
+        <button type="button" onclick="generateYAMLFile()">Generate YAML File</button>
+    
+    </form>
+    
+    <script src="https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js"></script>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
