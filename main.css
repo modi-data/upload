@@ -63,7 +63,8 @@
     padding-top: 8px;
     padding-bottom: 8px;
     padding-left: 8px;
-    padding-right: 8px
+    padding-right: 8px;
+    border-radius: 5px;
 }
 
 .standard-style {
@@ -97,8 +98,8 @@
     padding-bottom: 8px;
     padding-left: 8px;
     padding-right: 8px;
-    text-align: center;
-    color: #000
+    text-align: left;
+    color: #000;
 }
 
 .text-input-field:focus {
@@ -287,4 +288,60 @@ body {
     margin: 0 !important;
     max-width: 500px !important;
     max-height: 500px !important
+}
+
+.progress-bar-container {
+    display: flex;
+    justify-content: space-between
+}
+
+.progress-bar-item {
+    flex: 1;
+    height: 40px;
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer
+}
+
+.progress-bar-item.active {
+    background-color: #3c3ea7;
+    color: white
+}
+
+.form-container {
+    margin-bottom: 30px;
+    margin: auto;
+    width: 60%;
+}
+
+.form-group {
+    background-color: #3c3ea769;
+    border-radius: 8px;
+}
+
+.form {
+    padding: 12px;
+}
+
+
+
+.question {
+    padding: 24px;
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 12px;
+}
+
+.question-label {
+    margin-bottom: 12px;
+}
+
+textarea {
+    width: 100%;
+    resize: none;
+    height: 42px;
 }

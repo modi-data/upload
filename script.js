@@ -1,26 +1,5 @@
 function generateYAMLFile() {
-    function splitTextByLength(text, maxLength) {
-        if (!text) return "N/A";
     
-        let words = text.split(' ');
-        let lines = [];
-        let currentLine = '';
-    
-        for (const word of words) {
-            if ((currentLine + word).length <= maxLength) {
-                currentLine += word + ' ';
-            } else {
-                lines.push(currentLine.trim());
-                currentLine = word + ' ';
-            }
-        }
-    
-        if (currentLine) {
-            lines.push(currentLine.trim());
-        }
-    
-        return lines.join('\n');
-    }
     
     const summary = {
         why_was_it_collected: splitTextByLength(document.getElementById('why_was_it_collected').value, 85),
@@ -103,3 +82,54 @@ function download(content, filename, contentType) {
         window.URL.revokeObjectURL(url);
     }, 0);
 }
+
+function splitTextByLength(text, maxLength) {
+    if (!text) return "N/A";
+
+    let words = text.split(' ');
+    let lines = [];
+    let currentLine = '';
+
+    for (const word of words) {
+        if ((currentLine + word).length <= maxLength) {
+            currentLine += word + ' ';
+        } else {
+            lines.push(currentLine.trim());
+            currentLine = word + ' ';
+        }
+    }
+
+    if (currentLine) {
+        lines.push(currentLine.trim());
+    }
+
+    return lines.join('\n');
+}
+
+function showPart(partNumber) {
+    for (let i = 1; i <= 4; i++) {
+        const partElement = document.getElementById(`part${i}`);
+        if (i === partNumber) {
+            partElement.style.display = 'block';
+        } else {
+            partElement.style.display = 'none';
+        }
+    }
+    updateProgressBar(partNumber);
+}
+
+function updateProgressBar(currentStep) {
+    const progressBarItems = document.querySelectorAll('.progress-bar-item');
+    progressBarItems.forEach((item, index) => {
+        if (index + 1 === currentStep) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}
+
+function auto_grow(element) {
+    element.style.height = "5px";
+    element.style.height = (element.scrollHeight + 5) + "px";
+  }

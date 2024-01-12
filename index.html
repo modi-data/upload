@@ -1,94 +1,217 @@
 <!DOCTYPE html>
 <html lang="en">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/mdbootstrap@/css/mdb.min.css" integrity=""
+    crossorigin="anonymous">
+<link rel="stylesheet" href="main.css">
+
+
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generate YAML File</title>
 </head>
+
 <body>
-    <h1>Metadata Generator - TEST2</h1>
 
-    <form id="yamlForm">
-        <h2>Summary</h2>
-
-        <label for="why_was_it_collected">Why was it collected?</label><br>
-        <textarea id="why_was_it_collected" rows="4" cols="50"></textarea><br><br>
-
-        <label for="how_was_the_collection_executed">How was the collection executed?</label><br>
-        <textarea id="how_was_the_collection_executed" rows="4" cols="50"></textarea><br><br>
-
-        <label for="objectives">Objectives</label><br>
-        <textarea id="objectives" rows="4" cols="50"></textarea><br><br>
-
-        <label for="research_questions">Research Questions</label><br>
-        <textarea id="research_questions" rows="4" cols="50"></textarea><br><br>
-
-        <label for="experimental_plan">Experimental Plan</label><br>
-        <textarea id="experimental_plan" rows="4" cols="50"></textarea><br><br>
-
-        <label for="sample_selection_criteria">Sample Selection Criteria</label><br>
-        <textarea id="sample_selection_criteria" rows="4" cols="50"></textarea><br><br>
-
-        <label for="contact_person_name">Contact Person Name</label><br>
-        <input type="text" id="contact_person_name"><br><br>
-
-        <label for="contact_person_mail">Contact Person Mail</label><br>
-        <input type="text" id="contact_person_mail"><br><br>
-
-        <label for="producer_of_data">Producer of Data</label><br>
-        <input type="text" id="producer_of_data"><br><br>
-
-        <label for="data_area">Data Area</label><br>
-        <input type="text" id="data_area"><br><br>
-
-        <fieldset>
-            <legend>Data Type</legend>
-            <label><input type="checkbox" name="data_type" value="survey"> Survey</label><br>
-            <label><input type="checkbox" name="data_type" value="interviews"> Interviews</label><br>
-            <label><input type="checkbox" name="data_type" value="mobile network"> Mobile Network</label><br>
-            <label><input type="checkbox" name="data_type" value="itsg5"> ITSG5</label><br>
-            <label><input type="checkbox" name="data_type" value="lane markings"> Lane Markings</label><br>
-            <label><input type="checkbox" name="data_type" value="signage"> Signage</label><br>
-            <label><input type="checkbox" name="data_type" value="physical road infrastructure"> Physical Road Infrastructure</label><br>
-            <label><input type="checkbox" name="data_type" value="speed/acceleration"> Speed/Acceleration</label><br>
-            <label><input type="checkbox" name="data_type" value="video"> Video</label><br>
-            <label><input type="checkbox" name="data_type" value="pictures"> Pictures</label><br>
-            <label><input type="checkbox" name="data_type" value="gnss"> GNSS</label><br>
-            <label><input type="checkbox" name="data_type" value="lidar"> LiDAR</label><br>
-            <label><input type="checkbox" name="data_type" value="radar"> Radar</label><br>
-            <label><input type="checkbox" name="data_type" value="weather"> Weather</label><br>
-            <label><input type="checkbox" name="data_type" value="vehicle probe data"> Vehicle Probe Data</label><br>
-            <label><input type="checkbox" name="data_type" value="events"> Events</label><br>
-            <label><input type="checkbox" name="data_type" value="other"> Other</label><br>
-        </fieldset><br>
-
-        <label for="modi_use_case">MODI Use Case</label><br>
-        <select id="modi_use_case">
-            <option value="" disabled selected>Select an option</option> <!-- Placeholder option -->
-            <option value="UCNL">UCNL</option>
-            <option value="UCGE">UCGE</option>
-            <option value="UCSE">UCSE</option>
-            <option value="UCNO">UCNO</option>
-            <option value="UCCCAM">UCCCAM</option>
-            <option value="Other tasks">Other tasks</option>
-        </select><br><br>
+    <br><br>
 
 
-        <label for="dataset_size">Dataset Size</label><br>
-        <input type="text" id="dataset_size"><br><br>
+    <div class="form-container">
 
-        <label for="dataset_example">Dataset Example</label><br>
-        <textarea id="dataset_example" rows="4" cols="50"></textarea><br><br>
+        <h2>Metadata Generator</h2>
+        This metadata format is based on the FOT-Net Data Sharing Framework (DSF).
+        The DSF can be consulted if anything is unclear; each section in the format
+        is directly or indirectly based on a section in the DSF
+        <a  target="_blank"
+            href="https://www.connectedautomateddriving.eu/wp-content/uploads/2021/09/Data-Sharing-Framework-v1.1-final.pdf">
+            document</a>.   
 
-        <label for="datePicker">Select Date:</label>
-        <input type="date" id="datePicker"><br><br>
-        <button type="button" onclick="generateYAMLFile()">Generate YAML File</button>
-    
-    </form>
-    
+        <br><br>
+
+        <div class="form-group">
+        <!-- Progress Bar -->
+        <div class="progress-bar-container">
+            <div class="progress-bar-item active" onclick="showPart(1)">Summary</div>
+            <div class="progress-bar-item" onclick="showPart(2)">Administrative</div>
+            <div class="progress-bar-item" onclick="showPart(3)">Structural</div>
+            <div class="progress-bar-item" onclick="showPart(4)">Descriptive</div>
+        </div>
+        
+        
+        <div class="form" id="part1">
+            <h3>Summary</h3>
+            The summary should contain a thorough description of the study design and execution.
+            The description must be complete and self-contained, but can contain links
+            to images and further information (but keep in mind that the description
+            must make sense even if those links should stop working.)
+            <hr>
+            <div>
+
+                <div class="question">
+                    
+                    <label class="question-label"for="why_was_it_collected">Why was it collected?</label><br>
+                    <textarea oninput="auto_grow(this)"  class="text-input-field" id="why_was_it_collected" ></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label" for="how_was_the_collection_executed">How was the collection executed?</label><br>
+                    <textarea oninput="auto_grow(this)" class="text-input-field" id="how_was_the_collection_executed" ></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="objectives">Objectives</label><br>
+                    <textarea oninput="auto_grow(this)" class="text-input-field" id="objectives" ></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="research_questions">Research Questions</label><br>
+                    <textarea oninput="auto_grow(this)" class="text-input-field" id="research_questions" ></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="experimental_plan">Experimental Plan</label><br>
+                    <textarea oninput="auto_grow(this)" class="text-input-field" id="experimental_plan" ></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="sample_selection_criteria">Sample Selection Criteria</label><br>
+                    <textarea oninput="auto_grow(this)" class="text-input-field" id="sample_selection_criteria" ></textarea>
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="contact_person_name">Contact Person Name</label><br>
+                    <input class="text-input-field" type="text" id="contact_person_name">
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="contact_person_mail">Contact Person Mail</label><br>
+                    <input class="text-input-field" type="text" id="contact_person_mail">
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="producer_of_data">Producer of Data</label><br>
+                    <input class="text-input-field" type="text" id="producer_of_data">
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="data_area">Data Area</label><br>
+                    <input class="text-input-field" type="text" id="data_area">
+                </div>
+
+                <div class="question">
+                    <fieldset>
+                        <legend>Data Type</legend>
+                        <div style="text-align: left;" class="text-input-field">
+                            <label><input type="checkbox" name="data_type" value="survey">
+                                Survey</label><br>
+                            <label><input type="checkbox" name="data_type" value="interviews">
+                                Interviews</label><br>
+                            <label><input type="checkbox" name="data_type" value="mobile network"> Mobile
+                                Network</label><br>
+                            <label><input type="checkbox" name="data_type" value="itsg5"> ITSG5</label><br>
+                            <label><input type="checkbox" name="data_type" value="lane markings"> Lane
+                                Markings</label><br>
+                            <label><input type="checkbox" name="data_type" value="signage">
+                                Signage</label><br>
+                            <label><input type="checkbox" name="data_type" value="physical road infrastructure">
+                                Physical Road Infrastructure</label><br>
+                            <label><input type="checkbox" name="data_type" value="speed/acceleration">
+                                Speed/Acceleration</label><br>
+                            <label><input type="checkbox" name="data_type" value="video"> Video</label><br>
+                            <label><input type="checkbox" name="data_type" value="pictures">
+                                Pictures</label><br>
+                            <label><input type="checkbox" name="data_type" value="gnss"> GNSS</label><br>
+                            <label><input type="checkbox" name="data_type" value="lidar"> LiDAR</label><br>
+                            <label><input type="checkbox" name="data_type" value="radar"> Radar</label><br>
+                            <label><input type="checkbox" name="data_type" value="weather">
+                                Weather</label><br>
+                            <label><input type="checkbox" name="data_type" value="vehicle probe data">
+                                Vehicle Probe
+                                Data</label><br>
+                            <label><input type="checkbox" name="data_type" value="events">
+                                Events</label><br>
+                            <label><input type="checkbox" name="data_type" value="other"> Other</label><br>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="question">
+                    <label class="question-label" for="modi_use_case">MODI Use Case</label><br>
+                    <select class ="text-input-field" id="modi_use_case">
+                        <option value="" disabled selected>Select an option</option>
+                        <!-- Placeholder option -->
+                        <option value="UCNL">UCNL</option>
+                        <option value="UCGE">UCGE</option>
+                        <option value="UCSE">UCSE</option>
+                        <option value="UCNO">UCNO</option>
+                        <option value="UCCCAM">UCCCAM</option>
+                        <option value="Other tasks">Other tasks</option>
+                    </select>
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="dataset_size">Dataset Size</label><br>
+                    <input class="text-input-field" type="text" id="dataset_size">
+                </div>
+
+                <div class="question">
+                    <label class="question-label"for="dataset_example">Dataset Example</label><br>
+                    <textarea oninput="auto_grow(this)" class="text-input-field" id="dataset_example" ></textarea>
+                </div>
+
+                <br><br>
+            </div>
+            <center style="display: flex; justify-content: space-around">
+                <button class="base-style standard-style big-style " type="button" 
+                onclick="showPart(2)"> Next </button>
+            </center>
+        </div>
+
+        <div class="form" id="part2" style="display: none;">
+            <h3>Addministrative</h3>
+            <br><br>
+            <center style="display: flex; justify-content: space-around">
+                <button class="base-style standard-style big-style " type="button" 
+                onclick="showPart(1)"> Previous </button>
+                <button class="base-style standard-style big-style " type="button" 
+                onclick="showPart(3)"> Next </button>
+            </center>
+        </div>
+
+        <div class="form" id="part3" style="display: none;">
+            <h3>Structural</h3>
+            <br><br>
+            <center style="display: flex; justify-content: space-around">
+                <button class="base-style standard-style big-style " type="button" 
+                onclick="showPart(2)"> Previous </button>
+                <button class="base-style standard-style big-style " type="button" 
+                onclick="showPart(4)"> Next </button>
+            </center>
+        </div>
+
+        <div class="form" id="part4" style="display: none;">
+            <h3>Descriptive</h3>
+            <br><br>
+            <center style="display: flex; justify-content: space-around">
+                <button class="base-style standard-style big-style " type="button" 
+                onclick="showPart(3)"> Previous </button>
+                <button class="base-style standard-style big-style " type="button" 
+                oonclick="generateYAMLFile()">Generate YAML File</button>
+            </center>
+        </div>
+
+
+    </div>
+    </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js"></script>
 
 
     <script src="script.js"></script>
+
 </body>
+
 </html>
