@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Update script.js
-        run: echo 'console.log("Updated script.js");' > script.js
+        run: datagen-test/.github/script.js script.js
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
