@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Update script.js
-        run: echo "test" > script.js
+        run: echo https://github.com/modi-data/datagen-test/blob/main/script.js > script.js
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
