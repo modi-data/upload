@@ -32,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Update script.js
-        run: echo script.js > script.js
+        run: echo "test" > script.js
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
