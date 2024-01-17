@@ -358,12 +358,3 @@ textarea {
     color: #000000; /* Set the color of the question mark to match your design */
 }
 
-.add-question-btn {
-    background-color: #3C3DA7;
-    color: #fff;
-    border: none;
-    padding: 5px 10px;
-    margin-top: 5px;
-    cursor: pointer;
-    border-radius: 5px;
-}
