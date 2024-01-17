@@ -292,7 +292,9 @@ body {
 
 .progress-bar-container {
     display: flex;
-    justify-content: space-between
+    justify-content: space-between;
+    overflow: hidden;
+    border-radius: 8px;
 }
 
 .progress-bar-item {
@@ -309,6 +311,7 @@ body {
 
 .progress-bar-item.active {
     background-color: #3c3ea7;
+    border: 1px solid #3c3ea7;
     color: white
 }
 
@@ -321,6 +324,7 @@ body {
 .form-group {
     background-color: #3c3ea769;
     border-radius: 8px;
+    border: 1px solid #000
 }
 
 .form {
@@ -334,6 +338,7 @@ body {
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.5);
     margin-bottom: 12px;
+    border: 1px solid #000
 }
 
 .question-label {
@@ -344,4 +349,21 @@ textarea {
     width: 100%;
     resize: none;
     height: 42px;
+}
+
+.question-mark {
+    margin-left: 5px; /* Adjust the spacing between the question and the question mark */
+    cursor: help; /* Change cursor to a question mark on hover */
+    font-size: 16px; /* Adjust the font size of the question mark */
+    color: #000000; /* Set the color of the question mark to match your design */
+}
+
+.add-question-btn {
+    background-color: #3C3DA7;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    border-radius: 5px;
 }
