@@ -110,3 +110,73 @@ function deleteParent() {
     // Remove the parent element
     parentElement.remove();
 }
+
+
+// Function to save all form data to local storage
+function saveFormData() {
+    // Select all input, textarea, and select elements within the form container
+    const formElements = document.querySelectorAll('.form-container input, .form-container textarea, .form-container select');
+
+    // Save each element's value to local storage
+    formElements.forEach((element, index) => {
+        let value;
+
+        if (element.type === 'checkbox' || element.type === 'radio') {
+            // For checkboxes and radio buttons, save their checked status
+            value = element.checked;
+        } else if (element.type === 'select-multiple') {
+            // For multiple-select elements, save an array of selected options
+            value = Array.from(element.selectedOptions).map(option => option.value);
+        } else {
+            // For other elements, save their regular value
+            value = element.value;
+        }
+
+        localStorage.setItem(`form_element_${index}`, JSON.stringify(value));
+    });
+}
+
+// Function to load all form data from local storage
+function loadFormData() {
+    // Select all input, textarea, and select elements within the form container
+    const formElements = document.querySelectorAll('.form-container input, .form-container textarea, .form-container select');
+
+    // Load values from local storage and populate the form elements
+    formElements.forEach((element, index) => {
+        const savedValue = localStorage.getItem(`form_element_${index}`);
+        let parsedValue;
+
+        try {
+            parsedValue = JSON.parse(savedValue);
+        } catch (error) {
+            // If parsing fails, use the saved value as is
+            parsedValue = savedValue;
+        }
+
+        if (element.type === 'checkbox' || element.type === 'radio') {
+            // For checkboxes and radio buttons, set their checked status
+            element.checked = parsedValue;
+        } else if (element.type === 'select-multiple') {
+            // For multiple-select elements, select the saved options
+            Array.from(element.options).forEach(option => {
+                option.selected = parsedValue && parsedValue.includes(option.value);
+            });
+        } else {
+            // For other elements, set their regular value
+            element.value = parsedValue || '';
+        }
+    });
+}
+
+// Attach an event listener to each form element to save data when it changes
+document.addEventListener('input', function (event) {
+    const targetElement = event.target;
+
+    // Check if the target element is an input field, textarea, or select
+    if (targetElement.matches('.form-container input, .form-container textarea, .form-container select')) {
+        saveFormData();
+    }
+});
+
+// Call loadFormData() on page load to populate the form with saved values
+window.addEventListener('load', loadFormData);
