@@ -341,12 +341,12 @@
                             id="administrative_description_1"></textarea>
                         </div>
                         <center>
-                            <button class="add-question-btn" 
+                            <button class="base-style standard-style big-style " 
                             onclick="addQuestion(this.id)"
                             id="administrative_button_1">Add process</button>
                         </center>
                     </div>
-                    
+                     
 
 
                     </div>
@@ -417,16 +417,16 @@
                     </div>
 
                     <div class="question">
-                        <label class="question-label" for="tool_versions">
-                            Contact Person Name
+                        <label class="question-label" for="tool_version">
+                            Tool version
                             <span class="question-mark" title="If the files were made using a specific tool, the tool name and version may be relevant for reading the data.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <input class="text-input-field" type="text" id="tool_versions">
+                        <input class="text-input-field" type="text" id="tool_version">
                     </div>
 
-                    <div class="question">
+                    <div class="question" id="add_keys_structural">
                         <p style="margin-bottom: 12px;">
                         Additional keys and values can be added here if this is a non-standard format that requires
                         a more detailed explanation.<br>
@@ -584,10 +584,10 @@
         </div>
     </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/js-yaml/dist/js-yaml.min.js"></script>
-
-
-    <script src="script.js"></script>
+    <script src="scripts/form.js"></script>
+    <script src="scripts/generate.js"></script>
 
 </body>
 
