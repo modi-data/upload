@@ -98,7 +98,8 @@
                     <div class="question">
                         <label class="question-label" for="contact_person_name">
                             Contact Person Name
-                            <span class="question-mark" title="A person that can be contacted for more information about this dataset.">
+                            <span class="question-mark"
+                                title="A person that can be contacted for more information about this dataset.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -125,8 +126,8 @@
                     <div class="question">
                         <label class="question-label" for="data_area">
                             Data Area
-                            <span class="question-mark" 
-                            title="Which are the data are from. Can be an exact coordinate, a polygon, a town name, a country name, etc. If providing coordinates/polygons, it must be encoded as WKT with an SRID of 4326.">
+                            <span class="question-mark"
+                                title="Which are the data are from. Can be an exact coordinate, a polygon, a town name, a country name, etc. If providing coordinates/polygons, it must be encoded as WKT with an SRID of 4326.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -178,7 +179,8 @@
                     <div class="question">
                         <label class="question-label" for="modi_use_case">
                             MODI Use Case
-                            <span class="question-mark" title="Which of the use cases in MODI this dataset is related to.">
+                            <span class="question-mark"
+                                title="Which of the use cases in MODI this dataset is related to.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -206,14 +208,15 @@
                     <div class="question">
                         <label class="question-label" for="dataset_example">
                             Dataset Example
-                            <span class="question-mark" title="A tiny sample of the dataset to show how it looks (if possible).">
+                            <span class="question-mark"
+                                title="A tiny sample of the dataset to show how it looks (if possible).">
                                 &#x1F6C8;
                             </span>
                         </label><br>
                         <textarea oninput="autoGrow(this)" class="text-input-field" id="dataset_example"></textarea>
                     </div>
 
-                    
+
 
                     <br><br>
                 </div>
@@ -235,7 +238,8 @@
                     <div class="question">
                         <label class="question-label" for="version_number">
                             Version number
-                            <span class="question-mark" title="The version number of this dataset, used to keep track of different versions if it is uploaded multiple times. The version number can be numeric, date-based, or anything else, but it must be easy to see which version is newer without further knowledge.">
+                            <span class="question-mark"
+                                title="The version number of this dataset, used to keep track of different versions if it is uploaded multiple times. The version number can be numeric, date-based, or anything else, but it must be easy to see which version is newer without further knowledge.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -245,8 +249,7 @@
                     <div class="question">
                         <label class="question-label" for="archiving_date">
                             Archiving date
-                            <span class="question-mark" 
-                            title="The date this dataset was uploaded.">
+                            <span class="question-mark" title="The date this dataset was uploaded.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -256,8 +259,8 @@
                     <div class="question">
                         <label class="question-label" for="unique_dataset_id">
                             Unique dataset id
-                            <span class="question-mark" 
-                            title="A unique identifier for this dataset. This will be used to identify this and future updates in the metadata database, and must never be changed after the dataset has been uploaded for the first time.">
+                            <span class="question-mark"
+                                title="A unique identifier for this dataset. This will be used to identify this and future updates in the metadata database, and must never be changed after the dataset has been uploaded for the first time.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -289,23 +292,20 @@
                         <label class="question-label" for="constraints">
                             Any constraints in usage of the dataset?
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field"
-                            id="constraints"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field" id="constraints"></textarea>
                     </div>
-                    
+
                     <div class="question">
                         <label class="question-label" for="billing">
                             Can the dataset be used for free, or does usage incur any costs/billing for the user?
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field"
-                            id="billing"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field" id="billing"></textarea>
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="data_end_of_life">
                             When the data set will stop existing?
-                            <span class="question-mark" 
-                            title="For example due to privacy regulations.">
+                            <span class="question-mark" title="For example due to privacy regulations.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -314,42 +314,38 @@
 
                     <div class="question" id="process">
                         <p style="margin-bottom: 12px;">
-                            <h5>Process</h5>
-                            A more detailed description of the various processes of the data collection,
-                            for example the methods/tools used to collect the data, filtering, post-processing,
-                            storage file structure, etc. <br>
-                            This should include information about relevant conditions during the data collection
-                            (for example weather, climate, time of day, etc). <br>
-                            Add as many fields as desired, add a key and an detailed description of the process. 
-                            Keep in mind that each key should be unique. The keys will be transformed to lowercase 
-                            letters and no spaces. 
-                            <span class="question-mark" 
-                                
-                                title="'Collection Preparation' will be transformed into 'collection_preparation'">
-                                    &#x1F6C8;
-                            </span>
+                        <h5>Process</h5>
+                        A more detailed description of the various processes of the data collection,
+                        for example the methods/tools used to collect the data, filtering, post-processing,
+                        storage file structure, etc. <br>
+                        This should include information about relevant conditions during the data collection
+                        (for example weather, climate, time of day, etc). <br>
+                        Add as many fields as desired, add a key and an detailed description of the process.
+                        Keep in mind that each key should be unique. The keys will be transformed to lowercase
+                        letters and no spaces.
+                        <span class="question-mark"
+                            title="'Collection Preparation' will be transformed into 'collection_preparation'">
+                            &#x1F6C8;
+                        </span>
                         </p>
                         <div class="question" id="administrative_question_1">
-                            <input class="text-input-field" type="text" placeholder="Key" 
-                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Key'" 
-                            style="margin-bottom: 12px;"
-                            id="administrative_key_1"><br>
+                            <input class="text-input-field" type="text" placeholder="Key"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Key'"
+                                style="margin-bottom: 12px;" id="administrative_key_1"><br>
                             <textarea oninput="autoGrow(this)" class="text-input-field"
-                            placeholder="Detailed description" 
-                            onfocus="this.placeholder = ''" 
-                            onblur="this.placeholder = 'Detailed description'" 
-                            id="administrative_description_1"></textarea>
+                                placeholder="Detailed description" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'Detailed description'"
+                                id="administrative_description_1"></textarea>
                         </div>
                         <center>
-                            <button class="base-style standard-style big-style " 
-                            onclick="addQuestion(this.id)"
-                            id="administrative_button_1">Add process</button>
+                            <button class="base-style standard-style big-style " onclick="addQuestion(this.id)"
+                                id="administrative_button_1">Add process</button>
                         </center>
                     </div>
-                     
 
 
-                    </div>
+
+                </div>
 
 
                 <br><br>
@@ -370,9 +366,9 @@
                 is organized. The description should include the file system, the file structure and how to
                 interpret the contents of a data container. All components of the dataset need to be
                 described.
-                <span class="question-mark" 
+                <span class="question-mark"
                     title="'Collection Preparation' will be transformed into 'collection_preparation'">
-                        &#x1F6C8;
+                    &#x1F6C8;
                 </span>
                 <hr>
                 <div>
@@ -387,8 +383,8 @@
                     <div class="question">
                         <label class="question-label" for="file_format">
                             File format
-                            <span class="question-mark" 
-                            title="File format. Please include attributes such as delimiter for CSV, decimal separator, thousand separator (if any), and any other properties that is relevant for parsing the data.">
+                            <span class="question-mark"
+                                title="File format. Please include attributes such as delimiter for CSV, decimal separator, thousand separator (if any), and any other properties that is relevant for parsing the data.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -398,8 +394,8 @@
                     <div class="question">
                         <label class="question-label" for="file_structure">
                             File structure
-                            <span class="question-mark" 
-                            title="Please describe the storage structure of the data. If it consists of flat files, the folder structure and file naming can be relevant. If it is a database, a description of the relevant tables, indices, triggers and views is important.">
+                            <span class="question-mark"
+                                title="Please describe the storage structure of the data. If it consists of flat files, the folder structure and file naming can be relevant. If it is a database, a description of the relevant tables, indices, triggers and views is important.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -409,7 +405,8 @@
                     <div class="question">
                         <label class="question-label" for="required_tools">
                             Required tools
-                            <span class="question-mark" title="Which tools can be used to read the data. Especially important for non-standard formats.">
+                            <span class="question-mark"
+                                title="Which tools can be used to read the data. Especially important for non-standard formats.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -419,7 +416,8 @@
                     <div class="question">
                         <label class="question-label" for="tool_version">
                             Tool version
-                            <span class="question-mark" title="If the files were made using a specific tool, the tool name and version may be relevant for reading the data.">
+                            <span class="question-mark"
+                                title="If the files were made using a specific tool, the tool name and version may be relevant for reading the data.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
@@ -428,34 +426,31 @@
 
                     <div class="question" id="add_keys_structural">
                         <p style="margin-bottom: 12px;">
-                        Additional keys and values can be added here if this is a non-standard format that requires
-                        a more detailed explanation.<br>
-                        Keep in mind that each key should be unique. The keys will be transformed to lowercase 
-                        letters and no spaces. 
-                        <span class="question-mark" 
-                            title="'Collection Preparation' will be transformed into 'collection_preparation'">
+                            Additional keys and values can be added here if this is a non-standard format that requires
+                            a more detailed explanation.<br>
+                            Keep in mind that each key should be unique. The keys will be transformed to lowercase
+                            letters and no spaces.
+                            <span class="question-mark"
+                                title="'Collection Preparation' will be transformed into 'collection_preparation'">
                                 &#x1F6C8;
-                        </span>
+                            </span>
                         </p>
                         <div class="question" id="structural_question_1">
-                            <input class="text-input-field" type="text" placeholder="Key" 
-                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Key'" 
-                            style="margin-bottom: 12px;"
-                            id="structural_key_1"><br>
+                            <input class="text-input-field" type="text" placeholder="Key"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Key'"
+                                style="margin-bottom: 12px;" id="structural_key_1"><br>
                             <textarea oninput="autoGrow(this)" class="text-input-field"
-                            placeholder="Detailed description" 
-                            onfocus="this.placeholder = ''" 
-                            onblur="this.placeholder = 'Detailed description'" 
-                            id="structural_description_1"></textarea>
+                                placeholder="Detailed description" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'Detailed description'"
+                                id="structural_description_1"></textarea>
                         </div>
                         <center>
-                            <button class="add-question-btn" 
-                            onclick="addQuestion(this.id)"
-                            id="structural_button_1">Add pair</button>
+                            <button class="add-question-btn" onclick="addQuestion(this.id)" id="structural_button_1">Add
+                                pair</button>
                         </center>
                     </div>
 
-                    
+
 
 
                 </div>
@@ -479,7 +474,7 @@
                 The descriptions can vary by data type.<br>
                 For each data field in your dataset, please fill out all relevant parameters from section
                 5.3.1 of the DSF, and enter the attributes using the "Data description item" in lower-case
-                as the key. The following list lists the most relevant attributes from the tables, see 
+                as the key. The following list lists the most relevant attributes from the tables, see
                 tables 3 to 9 in the DSF for full explanations.<br>
                 <ul>
                     <li>description</li>
@@ -506,70 +501,54 @@
                     <li>When dealing with coordinates, the SRID must be specified with the srid key.</li>
                     <li>When dealing with times, the time zone must be specified with the timezone key.</li>
                     <li>When dealing with dates or times, the format must be specified with the format key.</li>
-                </ul>                
+                </ul>
                 <hr>
 
                 <div style="display: none;" class="question" id="field_dummy">
-                    <input class="text-input-field" type="text" placeholder="Field" 
-                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Field'" 
-                    style="margin-bottom: 12px;"
-                    id="field_key_dummy"><br>
-                    <textarea oninput="autoGrow(this)" class="text-input-field"
-                    placeholder="Description" 
-                    onfocus="this.placeholder = ''" 
-                    onblur="this.placeholder = 'Description'" 
-                    id="field_description_dummy"></textarea>
+                    <input class="text-input-field" type="text" placeholder="Field" onfocus="this.placeholder = ''"
+                        onblur="this.placeholder = 'Field'" style="margin-bottom: 12px;" id="field_key_dummy"><br>
+                    <textarea oninput="autoGrow(this)" class="text-input-field" placeholder="Description"
+                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'"
+                        id="field_description_dummy"></textarea>
                     <div class="question" id="field_dummy_atribute_dummy">
-                        <input class="text-input-field" type="text" placeholder="Atribute" 
-                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute'" 
-                        style="margin-bottom: 12px;"
-                        id="field_dummy_key_dummy"><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field"
-                        placeholder="Atribute information" 
-                        onfocus="this.placeholder = ''" 
-                        onblur="this.placeholder = 'Atribute information'" 
-                        id="field_dummy_information_dummy"></textarea>
+                        <input class="text-input-field" type="text" placeholder="Atribute"
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute'"
+                            style="margin-bottom: 12px;" id="field_dummy_key_dummy"><br>
+                        <textarea oninput="autoGrow(this)" class="text-input-field" placeholder="Atribute information"
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute information'"
+                            id="field_dummy_information_dummy"></textarea>
                     </div>
                     <center>
-                        <button class="base-style standard-style big-style " 
-                        onclick="addAtribute(this.id)"
-                        id="field_dummy_button_dummy">Add atribute</button>
+                        <button class="base-style standard-style big-style " onclick="addAtribute(this.id)"
+                            id="field_dummy_button_dummy">Add atribute</button>
                     </center>
                 </div>
-
-                <div class="question" id="field_1">
-                    <input class="text-input-field" type="text" placeholder="Field" 
-                    onfocus="this.placeholder = ''" onblur="this.placeholder = 'Field'" 
-                    style="margin-bottom: 12px;"
-                    id="field_key_1"><br>
-                    <textarea oninput="autoGrow(this)" class="text-input-field"
-                    placeholder="Description" 
-                    onfocus="this.placeholder = ''" 
-                    onblur="this.placeholder = 'Description'" 
-                    id="field_description_1"></textarea>
-                    <div class="question" id="field_1_atribute_1">
-                        <input class="text-input-field" type="text" placeholder="Atribute" 
-                        onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute'" 
-                        style="margin-bottom: 12px;"
-                        id="field_1_key_1"><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field"
-                        placeholder="Atribute information" 
-                        onfocus="this.placeholder = ''" 
-                        onblur="this.placeholder = 'Atribute information'" 
-                        id="field_1_information_1"></textarea>
+                <div id="descriptive">
+                    <div class="question" id="field_1">
+                        <input class="text-input-field" type="text" placeholder="Field" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = 'Field'" style="margin-bottom: 12px;" id="field_key_1"><br>
+                        <textarea oninput="autoGrow(this)" class="text-input-field" placeholder="Description"
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'"
+                            id="field_description_1"></textarea>
+                        <div class="question" id="field_1_atribute_1">
+                            <input class="text-input-field" type="text" placeholder="Atribute"
+                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute'"
+                                style="margin-bottom: 12px;" id="field_1_key_1"><br>
+                            <textarea oninput="autoGrow(this)" class="text-input-field"
+                                placeholder="Atribute information" onfocus="this.placeholder = ''"
+                                onblur="this.placeholder = 'Atribute information'"
+                                id="field_1_information_1"></textarea>
+                        </div>
+                        <center>
+                            <button class="base-style standard-style big-style " onclick="addAtribute(this.id)"
+                                id="field_1_button_1">Add atribute</button>
+                        </center>
                     </div>
-                    <center>
-                        <button class="base-style standard-style big-style " 
-                        onclick="addAtribute(this.id)"
-                        id="field_1_button_1">Add atribute</button>
+                    <center id="add_field_button">
+                        <button class="base-style standard-style big-style " onclick="addField(this.id)"
+                            id="button_1">Add field</button>
                     </center>
                 </div>
-                <center>
-                    <button class="base-style standard-style big-style " 
-                    onclick="addField(this.id)"
-                    id="button_1">Add field</button>
-                </center>
-
 
                 <br><br>
                 <center style="display: flex; justify-content: space-around">
@@ -578,8 +557,8 @@
                     <button class="base-style standard-style big-style " type="button"
                         onclick="generateYAMLFile()">Generate YAML File</button>
                 </center>
-            </div>
 
+            </div>
 
         </div>
     </div>

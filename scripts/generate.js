@@ -4,7 +4,7 @@ function generateYAMLFile() {
     const administrative = getAdministrative()
     const process = getProcesses()
     const structural = getStructural()
-    //const descriptive = getDescriptive()
+    const descriptive = getDescriptive()
 
     const yamlContent =
         `# This metadata format is based on the FOT-Net Data Sharing Framework (DSF).
@@ -40,6 +40,46 @@ ${process}
 # described."
 structural:
 ${structural}
+
+# 5.3.1 Descriptive metadata
+# "Descriptive metadata shall include detailed information needed to understand each part of a
+# dataset. The purpose is to describe the dataset and build trust in it—by providing not only the
+# characteristics of each measure or component, but also information about how the data were
+# generated and collected."
+descriptive:
+
+  # The descriptions can vary by data type.
+  # For each data field in your dataset, please fill out all relevant parameters from section
+  # 5.3.1 of the DSF, and enter the attributes using the "Data description item" in lower-case
+  # as the key. The following list lists the most relevant attributes from the tables, see 
+  # tables 3 to 9 in the DSF for full explanations.
+  
+  # - description
+  # - data_precision
+  # - unit
+  # - sample_rate
+  # - filter
+  # - origin
+  # - bias
+  # - type
+  # - definition
+  # - range
+  # - error_codes
+  # - quality
+  # - offset
+  # - enumeration_specification
+  # - availability
+  # - srid (for coordinates)
+  # - time_zone (for time stamps)
+  # - time_format (for time stamps)
+
+  # Please note the following additions to the DSF:
+  # - When dealing with coordinates, the SRID must be specified with the srid key.
+  # - When dealing with times, the time zone must be specified with the timezone key.
+  # - When dealing with dates or times, the format must be specified with the format key.
+  
+  fields:
+${descriptive}
 `
 
     download(yamlContent, `metadata.yml`, 'text/yaml');
@@ -268,8 +308,8 @@ function getProcesses() {
         return `    ${key}${separator}${value.split('\n').map(line => `      ${line}`).join(`\n`)}`;
     }).join('\n');
 
-    const processFinal = 
-`  # A more detailed description of the various processes of the data collection,
+    const processFinal =
+        `  # A more detailed description of the various processes of the data collection,
   # for example the methods/tools used to collect the data, filtering, post-processing,
   # storage file structure, etc.
   # This should include information about relevant conditions during the data collection
@@ -363,4 +403,82 @@ function getStructural() {
   # a more detailed explanation.\n` + structuralAdd;
 
     return structuralFinal;
+}
+
+function getDescriptive() {
+    const descriptiveRaw = {};
+
+    const descriptionElement = document.getElementById('add_field_button');
+    const fields = descriptionElement.querySelector('button').id.split('_')[1];
+
+    for (let i = 1; i <= fields; i++) {
+        const field = {};
+
+        const fieldElement = document.getElementById(`field_${i}`);
+
+        if (fieldElement) {
+            const keyElement = document.getElementById(`field_key_${i}`);
+            const descriptionElement = document.getElementById(`field_description_${i}`);
+
+            if (keyElement && descriptionElement) {
+                const fieldKey = keyElement.value;
+                const fieldDescription = splitTextByLength(descriptionElement.value, 85);;
+
+                // Check if both key and description have values before adding to the process object
+                if (fieldKey.trim() !== '' && fieldDescription.trim() !== '') {
+                    field["description"] = fieldDescription;
+                }
+
+                const attributes = fieldElement.querySelector('button').id.split('_')[3];
+                for (let j = 1; j <= attributes; j++) {
+                    const attributeElement = document.getElementById(`field_${i}_key_${j}`);
+                    const informationElement = document.getElementById(`field_${i}_information_${j}`);
+
+                    if (attributeElement && informationElement) {
+                        const atributekey = attributeElement.value;
+                        const atributeInformation = splitTextByLength(informationElement.value, 85);
+
+                        // Check if both key and description have values before adding to the process object
+                        if (atributekey.trim() !== '' && atributeInformation.trim() !== '') {
+                            field[atributekey] = atributeInformation;
+                        }
+                    }
+                }
+                descriptiveRaw[fieldKey] = field;
+            }
+        }
+    }
+
+
+    const stringifyNestedObject = (obj) => {
+        const indent = '      ';
+        let result = '';
+    
+        for (const [key, value] of Object.entries(obj)) {
+            if (key === 'description') {
+                if (value.includes('\n')) {
+                    result += `\n${indent}${key}: |\n${value.split('\n').map(line => `        ${line}`).join(`\n`)}\n`;
+                } else {
+                    result += `\n${indent}${key}: ${value}\n`;
+                }
+            } else {
+                if (value.includes('\n')) {
+                    result += `\n${indent}${key}: |\n${value.split('\n').map(line => `        ${line}`).join(`\n`)}`;
+                } else {
+                    result += `\n${indent}${key}: ${value}`;
+                }
+            }
+        }
+    
+        return result;
+    };
+    
+    const descriptiveFinal = Object.entries(descriptiveRaw).map(([key, value]) => {
+
+        return `\n    ${key}:${stringifyNestedObject(value)}`;
+
+    }).join('\n');
+    
+
+    return descriptiveFinal;
 }
