@@ -338,7 +338,8 @@ body {
     border-radius: 8px;
     background-color: rgba(255, 255, 255, 0.5);
     margin-bottom: 12px;
-    border: 1px solid #000
+    border: 1px solid #000;
+    position: relative;
 }
 
 .question-label {
@@ -358,3 +359,11 @@ textarea {
     color: #000000; /* Set the color of the question mark to match your design */
 }
 
+.deleteButton {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    padding-left: 12px;
+    padding-right: 12px;
+}

@@ -32,50 +32,53 @@ function addQuestion(previousButtonId) {
     var page = previousButtonId.split('_')[0];
     var previousIdNumber = parseInt(previousButtonId.split('_')[2]);
     var newIdNumber = previousIdNumber + 1;
-    var previousQuestionId = `${page}_question_${previousIdNumber}`;
 
-    var previousQuestion = document.getElementById(previousQuestionId);
-    var newQuestion = previousQuestion.cloneNode(true);
+    var baseQuestion = document.getElementById(`${page}_question_1`);
+    var newQuestion = baseQuestion.cloneNode(true);
 
     newQuestion.id = page + "_question_" + newIdNumber;
-    newQuestion.querySelector(`#${page}_key_${previousIdNumber}`).id = `${page}_key_${newIdNumber}`;
-    newQuestion.querySelector(`#${page}_description_${previousIdNumber}`).id = `${page}_description_${newIdNumber}`;
+    newQuestion.querySelector(`#${page}_key_1`).id = `${page}_key_${newIdNumber}`;
+    newQuestion.querySelector(`#${page}_description_1`).id = `${page}_description_${newIdNumber}`;
 
     newQuestion.querySelector(`#${page}_key_${newIdNumber}`).value = '';
     newQuestion.querySelector(`#${page}_description_${newIdNumber}`).value = '';
 
-    previousQuestion.parentElement.querySelector(`#${page}_button_${previousIdNumber}`).id = `${page}_button_${newIdNumber}`;
+    newQuestion.querySelector(`#delete_button`).style.display = '';
 
-    previousQuestion.parentNode.insertBefore(newQuestion, previousQuestion.nextSibling);
+    baseQuestion.parentElement.querySelector(`#${page}_button_${previousIdNumber}`).id = `${page}_button_${newIdNumber}`;
+
+    var button = baseQuestion.parentElement.querySelector('#add_question_button'); 
+
+    baseQuestion.parentNode.insertBefore(newQuestion, button);
 }
 
 function addAtribute(previousButtonId) {
     var field = previousButtonId.split('_')[1];
     var PreviousAtributeIdNumber = parseInt(previousButtonId.split('_')[3]);
     var atributeIdNumber = PreviousAtributeIdNumber + 1;
-    var previousAtributeId = `field_${field}_atribute_${PreviousAtributeIdNumber}`;
+    var leadAtributeId = `field_${field}_atribute_1`;
 
-    var previousAtribute = document.getElementById(previousAtributeId);
-    var newAtribute = previousAtribute.cloneNode(true);
+    var leadAtribute = document.getElementById(leadAtributeId);
+    var newAtribute = document.getElementById('field_dummy_atribute_dummy').cloneNode(true);
 
     newAtribute.id = `field_${field}_atribute_${atributeIdNumber}`;
-    newAtribute.querySelector(`#field_${field}_key_${PreviousAtributeIdNumber}`).id = `field_${field}_key_${atributeIdNumber}`;
-    newAtribute.querySelector(`#field_${field}_information_${PreviousAtributeIdNumber}`).id = `field_${field}_information_${atributeIdNumber}`;
+    newAtribute.querySelector(`#field_dummy_key_dummy`).id = `field_${field}_key_${atributeIdNumber}`;
+    newAtribute.querySelector(`#field_dummy_information_dummy`).id = `field_${field}_information_${atributeIdNumber}`;
 
-    newAtribute.querySelector(`#field_${field}_key_${atributeIdNumber}`).value = '';
-    newAtribute.querySelector(`#field_${field}_information_${atributeIdNumber}`).value = '';
+    newAtribute.style.display = '';
 
-    previousAtribute.parentElement.querySelector(`#field_${field}_button_${PreviousAtributeIdNumber}`).id = `field_${field}_button_${atributeIdNumber}`;
+    newAtribute.querySelector(`#delete_button`).style.display = '';
 
-    previousAtribute.parentNode.insertBefore(newAtribute, previousAtribute.nextSibling);
+    leadAtribute.parentElement.querySelector(`#field_${field}_button_${PreviousAtributeIdNumber}`).id = `field_${field}_button_${atributeIdNumber}`;
+
+    var button = leadAtribute.parentElement.querySelector('#add_atribute_button'); 
+    leadAtribute.parentNode.insertBefore(newAtribute, button);
 }
 
 function addField(previousButtonId) {
     var previousFieldIdNumber = previousButtonId.split('_')[1];
     var newFieldIdNumber = parseInt(previousFieldIdNumber) + 1;
-    var previousFieldId = `field_${previousFieldIdNumber}`;
 
-    var previousField = document.getElementById(previousFieldId);
     var newField = document.getElementById('field_dummy').cloneNode(true);
 
     newField.id = `field_${newFieldIdNumber}`;
@@ -89,7 +92,21 @@ function addField(previousButtonId) {
 
     newField.style.display = '';
 
-    previousField.parentElement.querySelector(`#button_${previousFieldIdNumber}`).id = `button_${newFieldIdNumber}`;
+    var descriptive_element = document.getElementById('descriptive');
+    var button = document.getElementById('add_field_button');
 
-    previousField.parentNode.insertBefore(newField, previousField.nextSibling);
+    descriptive_element.querySelector(`#button_${previousFieldIdNumber}`).id = `button_${newFieldIdNumber}`;
+    descriptive_element.insertBefore(newField, button);
+}
+
+// Function to delete the parent element of the clicked button
+function deleteParent() {
+    // Get the button element that was clicked
+    const clickedButton = event.target;
+
+    // Get the parent element of the button
+    const parentElement = clickedButton.parentElement;
+
+    // Remove the parent element
+    parentElement.remove();
 }

@@ -329,6 +329,8 @@
                         </span>
                         </p>
                         <div class="question" id="administrative_question_1">
+                            <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
+                                id="delete_button" style="display: none">X</button>
                             <input class="text-input-field" type="text" placeholder="Key"
                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Key'"
                                 style="margin-bottom: 12px;" id="administrative_key_1"><br>
@@ -337,7 +339,7 @@
                                 onblur="this.placeholder = 'Detailed description'"
                                 id="administrative_description_1"></textarea>
                         </div>
-                        <center>
+                        <center id="add_question_button">
                             <button class="base-style standard-style big-style " onclick="addQuestion(this.id)"
                                 id="administrative_button_1">Add process</button>
                         </center>
@@ -436,6 +438,8 @@
                             </span>
                         </p>
                         <div class="question" id="structural_question_1">
+                            <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
+                                id="delete_button" style="display: none">X</button>
                             <input class="text-input-field" type="text" placeholder="Key"
                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Key'"
                                 style="margin-bottom: 12px;" id="structural_key_1"><br>
@@ -444,8 +448,9 @@
                                 onblur="this.placeholder = 'Detailed description'"
                                 id="structural_description_1"></textarea>
                         </div>
-                        <center>
-                            <button class="add-question-btn" onclick="addQuestion(this.id)" id="structural_button_1">Add
+                        <center id="add_question_button">
+                            <button class="base-style standard-style big-style " onclick="addQuestion(this.id)" 
+                            id="structural_button_1">Add
                                 pair</button>
                         </center>
                     </div>
@@ -505,12 +510,16 @@
                 <hr>
 
                 <div style="display: none;" class="question" id="field_dummy">
+                    <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
+                    id="delete_button">X</button>
                     <input class="text-input-field" type="text" placeholder="Field" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Field'" style="margin-bottom: 12px;" id="field_key_dummy"><br>
                     <textarea oninput="autoGrow(this)" class="text-input-field" placeholder="Description"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'"
                         id="field_description_dummy"></textarea>
                     <div class="question" id="field_dummy_atribute_dummy">
+                        <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
+                    id="delete_button" style="display: none">X</button>
                         <input class="text-input-field" type="text" placeholder="Atribute"
                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute'"
                             style="margin-bottom: 12px;" id="field_dummy_key_dummy"><br>
@@ -518,7 +527,7 @@
                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute information'"
                             id="field_dummy_information_dummy"></textarea>
                     </div>
-                    <center>
+                    <center id="add_atribute_button">
                         <button class="base-style standard-style big-style " onclick="addAtribute(this.id)"
                             id="field_dummy_button_dummy">Add atribute</button>
                     </center>
@@ -531,6 +540,8 @@
                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'"
                             id="field_description_1"></textarea>
                         <div class="question" id="field_1_atribute_1">
+                            <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
+                                id="delete_button" style="display: none">X</button>
                             <input class="text-input-field" type="text" placeholder="Atribute"
                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute'"
                                 style="margin-bottom: 12px;" id="field_1_key_1"><br>
@@ -539,7 +550,7 @@
                                 onblur="this.placeholder = 'Atribute information'"
                                 id="field_1_information_1"></textarea>
                         </div>
-                        <center>
+                        <center id="add_atribute_button">
                             <button class="base-style standard-style big-style " onclick="addAtribute(this.id)"
                                 id="field_1_button_1">Add atribute</button>
                         </center>
