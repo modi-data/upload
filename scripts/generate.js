@@ -285,7 +285,7 @@ function getAdministrative() {
 
 function getProcesses() {
     const processElement = document.getElementById('process');
-    const amount = processElement.querySelector('button').id.split('_')[2];
+    const amount = processElement.querySelector('#add_question_button').querySelector('button').id.split('_')[2];
 
     for (let i = 1; i <= amount; i++) {
         const keyElement = document.getElementById(`administrative_key_${i}`);
@@ -332,7 +332,7 @@ function getStructural() {
     };
 
     const structuralElement = document.getElementById('add_keys_structural');
-    const amount = structuralElement.querySelector('button').id.split('_')[2];
+    const amount = structuralElement.querySelector('#add_question_button').querySelector('button').id.split('_')[2];
 
     for (let i = 1; i <= amount; i++) {
         const keyElement = document.getElementById(`structural_key_${i}`);
