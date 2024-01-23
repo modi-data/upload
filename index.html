@@ -143,35 +143,35 @@
                                 </span>
                             </legend>
                             <div style="text-align: left;" class="text-input-field">
-                                <label><input type="checkbox" name="data_type" value="survey">
+                                <label><input id="data_type_1" type="checkbox" name="data_type" value="survey">
                                     Survey</label><br>
-                                <label><input type="checkbox" name="data_type" value="interviews">
+                                <label><input id="data_type_2" type="checkbox" name="data_type" value="interviews">
                                     Interviews</label><br>
-                                <label><input type="checkbox" name="data_type" value="mobile network"> Mobile
+                                <label><input id="data_type_3" type="checkbox" name="data_type" value="mobile network"> Mobile
                                     Network</label><br>
-                                <label><input type="checkbox" name="data_type" value="itsg5"> ITSG5</label><br>
-                                <label><input type="checkbox" name="data_type" value="lane markings"> Lane
+                                <label><input id="data_type_4" type="checkbox" name="data_type" value="itsg5"> ITSG5</label><br>
+                                <label><input id="data_type_5" type="checkbox" name="data_type" value="lane markings"> Lane
                                     Markings</label><br>
-                                <label><input type="checkbox" name="data_type" value="signage">
+                                <label><input id="data_type_6" type="checkbox" name="data_type" value="signage">
                                     Signage</label><br>
-                                <label><input type="checkbox" name="data_type" value="physical road infrastructure">
+                                <label><input id="data_type_7" type="checkbox" name="data_type" value="physical road infrastructure">
                                     Physical Road Infrastructure</label><br>
-                                <label><input type="checkbox" name="data_type" value="speed/acceleration">
+                                <label><input id="data_type_8" type="checkbox" name="data_type" value="speed/acceleration">
                                     Speed/Acceleration</label><br>
-                                <label><input type="checkbox" name="data_type" value="video"> Video</label><br>
-                                <label><input type="checkbox" name="data_type" value="pictures">
+                                <label><input id="data_type_9" type="checkbox" name="data_type" value="video"> Video</label><br>
+                                <label><input id="data_type_10" type="checkbox" name="data_type" value="pictures">
                                     Pictures</label><br>
-                                <label><input type="checkbox" name="data_type" value="gnss"> GNSS</label><br>
-                                <label><input type="checkbox" name="data_type" value="lidar"> LiDAR</label><br>
-                                <label><input type="checkbox" name="data_type" value="radar"> Radar</label><br>
-                                <label><input type="checkbox" name="data_type" value="weather">
+                                <label><input id="data_type_11" type="checkbox" name="data_type" value="gnss"> GNSS</label><br>
+                                <label><input id="data_type_12" type="checkbox" name="data_type" value="lidar"> LiDAR</label><br>
+                                <label><input id="data_type_13" type="checkbox" name="data_type" value="radar"> Radar</label><br>
+                                <label><input id="data_type_14" type="checkbox" name="data_type" value="weather">
                                     Weather</label><br>
-                                <label><input type="checkbox" name="data_type" value="vehicle probe data">
+                                <label><input id="data_type_15" type="checkbox" name="data_type" value="vehicle probe data">
                                     Vehicle Probe
                                     Data</label><br>
-                                <label><input type="checkbox" name="data_type" value="events">
+                                <label><input id="data_type_16" type="checkbox" name="data_type" value="events">
                                     Events</label><br>
-                                <label><input type="checkbox" name="data_type" value="other"> Other</label><br>
+                                <label><input id="data_type_17" type="checkbox" name="data_type" value="other"> Other</label><br>
                             </div>
                         </fieldset>
                     </div>
@@ -321,12 +321,7 @@
                         This should include information about relevant conditions during the data collection
                         (for example weather, climate, time of day, etc). <br>
                         Add as many fields as desired, add a key and an detailed description of the process.
-                        Keep in mind that each key should be unique. The keys will be transformed to lowercase
-                        letters and no spaces.
-                        <span class="question-mark"
-                            title="'Collection Preparation' will be transformed into 'collection_preparation'">
-                            &#x1F6C8;
-                        </span>
+                        Keep in mind that each key should be unique, contain no spaces and be lowercase.
                         </p>
                         <div class="question" id="administrative_question_1">
                             <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
@@ -430,12 +425,7 @@
                         <p style="margin-bottom: 12px;">
                             Additional keys and values can be added here if this is a non-standard format that requires
                             a more detailed explanation.<br>
-                            Keep in mind that each key should be unique. The keys will be transformed to lowercase
-                            letters and no spaces.
-                            <span class="question-mark"
-                                title="'Collection Preparation' will be transformed into 'collection_preparation'">
-                                &#x1F6C8;
-                            </span>
+                            Keep in mind that each key should be unique, contain no spaces and be lowercase.
                         </p>
                         <div class="question" id="structural_question_1">
                             <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"

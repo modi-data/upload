@@ -319,6 +319,7 @@ body {
     margin-bottom: 30px;
     margin: auto;
     width: 60%;
+    min-width: 400px;
 }
 
 .form-group {

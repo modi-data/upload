@@ -8,8 +8,12 @@ function showPart(partNumber) {
         }
     }
     updateProgressBar(partNumber);
+
+    document.getElementById(`part${partNumber}`).querySelectorAll('textarea').forEach(autoGrow);
+
     // Scroll to the top of the page
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
 }
 
 function updateProgressBar(currentStep) {
@@ -25,10 +29,10 @@ function updateProgressBar(currentStep) {
 
 function autoGrow(element) {
     element.style.height = "5px";
-    element.style.height = (element.scrollHeight + 5) + "px";
+    element.style.height = Math.max((element.scrollHeight + 5), 42) + "px";
 }
 
-function addQuestion(previousButtonId) {
+function addQuestion(previousButtonId, add = true) {
     var page = previousButtonId.split('_')[0];
     var previousIdNumber = parseInt(previousButtonId.split('_')[2]);
     var newIdNumber = previousIdNumber + 1;
@@ -50,9 +54,16 @@ function addQuestion(previousButtonId) {
     var button = baseQuestion.parentElement.querySelector('#add_question_button'); 
 
     baseQuestion.parentNode.insertBefore(newQuestion, button);
+    
+    if (add) {
+        var amount =parseInt(localStorage.getItem(page)) + 1 || 1;
+        localStorage.setItem(`${page}`, JSON.stringify(amount));
+        saveFormData();
+    }
+
 }
 
-function addAtribute(previousButtonId) {
+function addAtribute(previousButtonId, add = true) {
     var field = previousButtonId.split('_')[1];
     var PreviousAtributeIdNumber = parseInt(previousButtonId.split('_')[3]);
     var atributeIdNumber = PreviousAtributeIdNumber + 1;
@@ -73,9 +84,16 @@ function addAtribute(previousButtonId) {
 
     var button = leadAtribute.parentElement.querySelector('#add_atribute_button'); 
     leadAtribute.parentNode.insertBefore(newAtribute, button);
+    
+    if (add) {
+        var amount =parseInt(localStorage.getItem(`field_${field}_atributes`)) + 1 || 1;
+        localStorage.setItem(`field_${field}_atributes`, JSON.stringify(amount));
+        saveFormData();
+    }
+
 }
 
-function addField(previousButtonId) {
+function addField(previousButtonId, add = true) {
     var previousFieldIdNumber = previousButtonId.split('_')[1];
     var newFieldIdNumber = parseInt(previousFieldIdNumber) + 1;
 
@@ -97,6 +115,14 @@ function addField(previousButtonId) {
 
     descriptive_element.querySelector(`#button_${previousFieldIdNumber}`).id = `button_${newFieldIdNumber}`;
     descriptive_element.insertBefore(newField, button);
+
+    if (add) {
+        
+        var amount =parseInt(localStorage.getItem('fields')) + 1 || 1;
+        localStorage.setItem('fields', JSON.stringify(amount));
+        saveFormData();
+    }
+    
 }
 
 // Function to delete the parent element of the clicked button
@@ -107,6 +133,23 @@ function deleteParent() {
     // Get the parent element of the button
     const parentElement = clickedButton.parentElement;
 
+    var page = parentElement.id.split('_')[0];
+
+    if (page === "field") {
+        if (parentElement.id.split('_')[2] === "atribute") {
+            var field = parentElement.id.split('_')[1]
+            var amount =parseInt(localStorage.getItem(`field_${field}_atributes`)) - 1;
+            localStorage.setItem(`field_${field}_atributes`, JSON.stringify(amount ));
+        } else {
+            var amount =parseInt(localStorage.getItem('fields')) - 1;
+            localStorage.setItem('fields', JSON.stringify(amount));
+        }
+    } else {
+        var amount =parseInt(localStorage.getItem(page)) - 1;
+        localStorage.setItem(page, JSON.stringify(amount));
+    }
+
+    saveFormData();
     // Remove the parent element
     parentElement.remove();
 }
@@ -138,6 +181,26 @@ function saveFormData() {
 
 // Function to load all form data from local storage
 function loadFormData() {
+    // Create the added fields in Proccess
+    var processes = JSON.parse(localStorage.getItem('administrative'));
+    for (let i = 1; i <= processes; i++) {
+        addQuestion(`administrative_button_${i}`, false);
+    }
+
+    var addKeysStructural = JSON.parse(localStorage.getItem('structural'));
+    for (let i = 1; i <= addKeysStructural; i++) {
+        addQuestion(`structural_button_${i}`, false);
+    }
+
+    var fields = JSON.parse(localStorage.getItem('fields'));
+    for (let i = 1; i <= fields; i++) {
+        addField(`button_${i}`, false);
+        var atributes = JSON.parse(localStorage.getItem(`field_${i}_atributes`));
+        for (let j = 1; j <= atributes; j++) {
+            addAtribute(`field_${i}_button_${j}`, false);
+        }
+    }
+
     // Select all input, textarea, and select elements within the form container
     const formElements = document.querySelectorAll('.form-container input, .form-container textarea, .form-container select');
 
@@ -164,6 +227,9 @@ function loadFormData() {
         } else {
             // For other elements, set their regular value
             element.value = parsedValue || '';
+            if (element.type === 'textarea') {
+                autoGrow(element);
+            }
         }
     });
 }
