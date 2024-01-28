@@ -499,21 +499,45 @@
                 <div style="display: none;" class="question" id="field_dummy">
                     <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
                     id="delete_button">X</button>
+                    
                     <input class="text-input-field" type="text" placeholder="Field" onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Field'" style="margin-bottom: 12px;" id="field_key_dummy"><br>
                     <textarea oninput="autoGrow(this)" class="text-input-field" placeholder="Description"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'"
                         id="field_description_dummy"></textarea>
+
                     <div class="question" id="field_dummy_atribute_dummy">
                         <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
-                    id="delete_button" style="display: none">X</button>
-                        <input class="text-input-field" type="text" placeholder="Atribute"
-                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute'"
-                            style="margin-bottom: 12px;" id="field_dummy_key_dummy"><br>
+                            id="delete_button" style="display: none">X</button>
+                        <select class="text-input-field" id="field_dummy_key_dummy">
+                            <option value="" disabled selected>Select an atribute</option>
+                            <option value="data_precision">Data precision</option>
+                            <option value="unit">Unit</option>
+                            <option value="sample_rate">Sample rate</option>
+                            <option value="filter">Filter</option>
+                            <option value="origin">Origin</option>
+                            <option value="Type">Type</option>
+                            <option value="range">Range</option>
+                            <option value="error_codes">Error codes </option>
+                            <option value="quality">Quality</option>
+                            <option value="offset">Offset</option>
+                            <option value="Enumeration_specification">Enumeration specification</option>
+                            <option value="availability">Availability</option>
+                            <option value="definition">Definition</option>
+                            <option value="attribute_pi_or_summary_specification">Attribute, PI or summary specification</option>
+                            <option value="purpose">Purpose</option>
+                            <option value="variability">Variability</option>
+                            <option value="bias">Bias</option>
+                            <option value="instructions">Instructions</option>
+                            <option value="options">Options</option>
+
+                        </select>
+                        <br>
                         <textarea oninput="autoGrow(this)" class="text-input-field" placeholder="Atribute information"
                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute information'"
                             id="field_dummy_information_dummy"></textarea>
                     </div>
+
                     <center id="add_atribute_button">
                         <button class="base-style standard-style big-style " onclick="addAtribute(this.id)"
                             id="field_dummy_button_dummy">Add atribute</button>
@@ -530,9 +554,30 @@
                         <div class="question" id="field_1_atribute_1">
                             <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
                                 id="delete_button" style="display: none">X</button>
-                            <input class="text-input-field" type="text" placeholder="Atribute"
-                                onfocus="this.placeholder = ''" onblur="this.placeholder = 'Atribute'"
-                                style="margin-bottom: 12px;" id="field_1_key_1"><br>
+                                <select class="text-input-field" id="field_1_key_1">
+                                    <option value="" disabled selected>Select an atribute</option>
+                                    <option value="data_precision">Data precision</option>
+                                    <option value="unit">Unit</option>
+                                    <option value="sample_rate">Sample rate</option>
+                                    <option value="filter">Filter</option>
+                                    <option value="origin">Origin</option>
+                                    <option value="Type">Type</option>
+                                    <option value="range">Range</option>
+                                    <option value="error_codes">Error codes </option>
+                                    <option value="quality">Quality</option>
+                                    <option value="offset">Offset</option>
+                                    <option value="Enumeration_specification">Enumeration specification</option>
+                                    <option value="availability">Availability</option>
+                                    <option value="definition">Definition</option>
+                                    <option value="attribute_pi_or_summary_specification">Attribute, PI or summary specification</option>
+                                    <option value="purpose">Purpose</option>
+                                    <option value="variability">Variability</option>
+                                    <option value="bias">Bias</option>
+                                    <option value="instructions">Instructions</option>
+                                    <option value="options">Options</option>
+        
+                                </select>
+                                <br>
                             <textarea oninput="autoGrow(this)" class="text-input-field"
                                 placeholder="Atribute information" onfocus="this.placeholder = ''"
                                 onblur="this.placeholder = 'Atribute information'"

@@ -432,7 +432,8 @@ function getDescriptive() {
                     field["description"] = fieldDescription;
                 }
 
-                const attributes = fieldElement.querySelector('button').id.split('_')[3];
+                const attributes = fieldElement.querySelector('#add_atribute_button').querySelector('button').id.split('_')[3];
+                
                 for (let j = 1; j <= attributes; j++) {
                     const attributeElement = document.getElementById(`field_${i}_key_${j}`);
                     const informationElement = document.getElementById(`field_${i}_information_${j}`);
@@ -440,7 +441,7 @@ function getDescriptive() {
                     if (attributeElement && informationElement) {
                         const atributekey = attributeElement.value;
                         const atributeInformation = splitTextByLength(informationElement.value, 85);
-
+                        
                         // Check if both key and description have values before adding to the process object
                         if (atributekey.trim() !== '' && atributeInformation.trim() !== '') {
                             field[atributekey] = atributeInformation;
