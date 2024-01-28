@@ -81,11 +81,14 @@ descriptive:
   fields:
 ${descriptive}
 `
-
-    download(yamlContent, `metadata.yml`, 'text/yaml');
+    return yamlContent;
+    
 }
 
-function download(content, filename, contentType) {
+function downloadYAMLFile() {
+    content = generateYAMLFile();
+    filename = 'filename.yml';
+    contentType = 'text/yaml';
     const blob = new Blob([content], { type: contentType });
 
     const a = document.createElement('a');
@@ -453,7 +456,7 @@ function getDescriptive() {
     const stringifyNestedObject = (obj) => {
         const indent = '      ';
         let result = '';
-    
+
         for (const [key, value] of Object.entries(obj)) {
             if (key === 'description') {
                 if (value.includes('\n')) {
@@ -469,16 +472,16 @@ function getDescriptive() {
                 }
             }
         }
-    
+
         return result;
     };
-    
+
     const descriptiveFinal = Object.entries(descriptiveRaw).map(([key, value]) => {
 
         return `\n    ${key}:${stringifyNestedObject(value)}`;
 
     }).join('\n');
-    
+
 
     return descriptiveFinal;
 }

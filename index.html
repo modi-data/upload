@@ -198,11 +198,12 @@
                     <div class="question">
                         <label class="question-label" for="dataset_size">
                             Dataset Size
-                            <span class="question-mark" title="An approximate description of the size of this dataset.">
+                            <span class="question-mark"
+                                title="An approximate description of the size of this dataset.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <input class="text-input-field" type="text" id="dataset_size">
+                        <textarea oninput="autoGrow(this)" class="text-input-field" id="dataset_size"></textarea>
                     </div>
 
                     <div class="question">
@@ -271,7 +272,7 @@
                         <label class="question-label" for="rights">
                             Who has rights to use this dataset?
                         </label><br>
-                        <input class="text-input-field" type="text" id="rights">
+                        <textarea oninput="autoGrow(this)" class="text-input-field" id="rights"></textarea>
                     </div>
 
                     <div class="question">
@@ -285,7 +286,7 @@
                         <label class="question-label" for="access">
                             Who can access the dataset?
                         </label><br>
-                        <input class="text-input-field" type="text" id="access">
+                        <textarea oninput="autoGrow(this)" class="text-input-field" id="access"></textarea>
                     </div>
 
                     <div class="question">
@@ -522,6 +523,31 @@
                             id="field_dummy_button_dummy">Add atribute</button>
                     </center>
                 </div>
+                <div class="question" id="atributes">
+                    <h4 style="margin-bottom: 12px;">
+                        Atributes
+                    </h4>
+                    <p>Field name</p>
+                    <p>Description</p>
+
+
+                    <div class="question" id="structural_question_1">
+                        <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
+                            id="delete_button" style="display: none">X</button>
+                        <input class="text-input-field" type="text" placeholder="Key"
+                            onfocus="this.placeholder = ''" onblur="this.placeholder = 'Key'"
+                            style="margin-bottom: 12px;" id="structural_key_1"><br>
+                        <textarea oninput="autoGrow(this)" class="text-input-field"
+                            placeholder="Detailed description" onfocus="this.placeholder = ''"
+                            onblur="this.placeholder = 'Detailed description'"
+                            id="structural_description_1"></textarea>
+                    </div>
+                    <center id="add_question_button">
+                        <button class="base-style standard-style big-style " onclick="addQuestion(this.id)" 
+                        id="structural_button_1">Add
+                            pair</button>
+                    </center>
+                </div>
                 <div id="descriptive">
                     <div class="question" id="field_1">
                         <input class="text-input-field" type="text" placeholder="Field" onfocus="this.placeholder = ''"
@@ -556,7 +582,7 @@
                     <button class="base-style standard-style big-style " type="button" onclick="showPart(3)"> Previous
                     </button>
                     <button class="base-style standard-style big-style " type="button"
-                        onclick="generateYAMLFile()">Generate YAML File</button>
+                        onclick="downloadYAMLFile()">Download YAML File</button>
                 </center>
 
             </div>
