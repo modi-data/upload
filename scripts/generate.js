@@ -85,11 +85,96 @@ ${descriptive}
     
 }
 
-function downloadYAMLFile() {
-    content = generateYAMLFile();
+function downloadYAMLFile(metadataType) {
+    const summary = getSummray()
+    var yamlContent = `# This metadata format is based on the FOT-Net Data Sharing Framework (DSF).
+# The DSF can be consulted if anything is unclear; each section in the format is directly
+# or indirectly based on a section in the DSF document.
+# https://www.connectedautomateddriving.eu/wp-content/uploads/2021/09/Data-Sharing-Framework-v1.1-final.pdf
+
+# The summary should contain a thorough description of the study design and execution.
+# The description must be complete and self-contained, but can contain links
+# to images and further information (but keep in mind that the description
+# must make sense even if those links should stop working.)
+# Multiline strings can be written by starting the value with a pipe symbol (|).
+summary:
+${summary}
+
+`
+
+    if (metadataType === "Administrative") {
+        const administrative = getAdministrative()
+        const process = getProcesses()
+        yamlContent += `
+# 5.3.3 Administrative metadata
+# "Administrative metadata are collected for the effective operation and management of data
+# storage and catalogues. This administrative information, covering various topics, is stored
+# along with the datasets. From a FOT data re-use perspective, the key role of administrative
+# metadata is to cover access conditions, rights, ownership and constraints."
+administrative:
+${administrative}
+
+${process}`
+    } else if (metadataType === "Structural") {
+        const structural = getStructural()
+        yamlContent += `# 5.3.2 Structural metadata
+# "Structural metadata are used to describe how the data are structured in relation to other
+# data. Data are organized into a system (e.g., a database and/or file system), a structure or
+# database schema and a data content format. The aim of structural metadata is to facilitate
+# the initial phase of data re-use by providing the necessary documentation about how the data
+# is organized. The description should include the file system, the file structure and how to
+# interpret the contents of a data container. All components of the dataset need to be
+# described."
+structural:
+${structural}
+`        
+    } else if (metadataType === "Descriptive") {
+        const descriptive = getDescriptive()
+        yamlContent += `# 5.3.1 Descriptive metadata
+# "Descriptive metadata shall include detailed information needed to understand each part of a
+# dataset. The purpose is to describe the dataset and build trust in it—by providing not only the
+# characteristics of each measure or component, but also information about how the data were
+# generated and collected."
+descriptive:
+
+    # The descriptions can vary by data type.
+    # For each data field in your dataset, please fill out all relevant parameters from section
+    # 5.3.1 of the DSF, and enter the attributes using the "Data description item" in lower-case
+    # as the key. The following list lists the most relevant attributes from the tables, see 
+    # tables 3 to 9 in the DSF for full explanations.
+    
+    # - description
+    # - data_precision
+    # - unit
+    # - sample_rate
+    # - filter
+    # - origin
+    # - bias
+    # - type
+    # - definition
+    # - range
+    # - error_codes
+    # - quality
+    # - offset
+    # - enumeration_specification
+    # - availability
+    # - srid (for coordinates)
+    # - time_zone (for time stamps)
+    # - time_format (for time stamps)
+
+    # Please note the following additions to the DSF:
+    # - When dealing with coordinates, the SRID must be specified with the srid key.
+    # - When dealing with times, the time zone must be specified with the timezone key.
+    # - When dealing with dates or times, the format must be specified with the format key.
+    
+    fields:
+${descriptive}
+`
+ };
+
     filename = 'filename.yml';
     contentType = 'text/yaml';
-    const blob = new Blob([content], { type: contentType });
+    const blob = new Blob([yamlContent], { type: contentType });
 
     const a = document.createElement('a');
     const url = URL.createObjectURL(blob);

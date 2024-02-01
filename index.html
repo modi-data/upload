@@ -35,6 +35,8 @@
             <!-- Progress Bar -->
             <div class="progress-bar-container">
                 <div class="progress-bar-item active" onclick="showPart(1)">Summary</div>
+            </div>
+            <div class="progress-bar-container">
                 <div class="progress-bar-item" onclick="showPart(2)">Administrative</div>
                 <div class="progress-bar-item" onclick="showPart(3)">Structural</div>
                 <div class="progress-bar-item" onclick="showPart(4)">Descriptive</div>
@@ -222,8 +224,9 @@
                     <br><br>
                 </div>
                 <center style="display: flex; justify-content: space-around">
-                    <button class="base-style standard-style big-style " type="button" onclick="showPart(2)"> Next
-                    </button>
+                    <button class="base-style standard-style big-style " type="button" onclick="showPart(2)"> Administrative</button>
+                    <button class="base-style standard-style big-style " type="button" onclick="showPart(3)"> Structural</button>
+                    <button class="base-style standard-style big-style " type="button" onclick="showPart(4)"> Descriptive</button>
                 </center>
             </div>
 
@@ -348,9 +351,9 @@
 
                 <br><br>
                 <center style="display: flex; justify-content: space-around">
-                    <button class="base-style standard-style big-style " type="button" onclick="showPart(1)"> Previous
+                    <button class="base-style standard-style big-style " type="button" onclick="showPart(1)"> Summary
                     </button>
-                    <button class="base-style standard-style big-style " type="button" onclick="showPart(3)"> Next
+                    <button class="base-style standard-style big-style " type="button" onclick="downloadYAMLFile('Administrative')"> Download
                     </button>
                 </center>
             </div>
@@ -450,9 +453,9 @@
 
                 <br><br>
                 <center style="display: flex; justify-content: space-around">
-                    <button class="base-style standard-style big-style " type="button" onclick="showPart(2)"> Previous
+                    <button class="base-style standard-style big-style " type="button" onclick="showPart(1)"> Summary
                     </button>
-                    <button class="base-style standard-style big-style " type="button" onclick="showPart(4)"> Next
+                    <button class="base-style standard-style big-style " type="button" onclick="downloadYAMLFile('Structural')"> Download
                     </button>
                 </center>
             </div>
@@ -596,10 +599,10 @@
 
                 <br><br>
                 <center style="display: flex; justify-content: space-around">
-                    <button class="base-style standard-style big-style " type="button" onclick="showPart(3)"> Previous
+                    <button class="base-style standard-style big-style " type="button" onclick="showPart(1)"> Summary
                     </button>
-                    <button class="base-style standard-style big-style " type="button"
-                        onclick="downloadYAMLFile()">Download YAML File</button>
+                    <button class="base-style standard-style big-style " type="button" onclick="downloadYAMLFile('Descriptive')"> Download
+                    </button>
                 </center>
 
             </div>
