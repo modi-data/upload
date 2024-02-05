@@ -21,7 +21,7 @@
 
     <div class="form-container">
 
-        <h2>Metadata Generator</h2>
+        <h1>Metadata Generator</h1>
         This metadata format is based on the FOT-Net Data Sharing Framework (DSF).
         The DSF can be consulted if anything is unclear; each section in the format
         is directly or indirectly based on a section in the DSF
@@ -34,9 +34,7 @@
         <div class="form-group">
             <!-- Progress Bar -->
             <div class="progress-bar-container">
-                <div class="progress-bar-item active" onclick="showPart(1)">Summary</div>
-            </div>
-            <div class="progress-bar-container">
+                <div class="progress-bar-item active" style="border-right: 1px solid gray;" onclick="showPart(1)">Summary</div>
                 <div class="progress-bar-item" onclick="showPart(2)">Administrative</div>
                 <div class="progress-bar-item" onclick="showPart(3)">Structural</div>
                 <div class="progress-bar-item" onclick="showPart(4)">Descriptive</div>
@@ -44,7 +42,7 @@
 
 
             <div class="form" id="part1">
-                <h3>Summary</h3>
+                <h2>Summary</h2>
                 The summary should contain a thorough description of the study design and execution.
                 The description must be complete and self-contained, but can contain links
                 to images and further information (but keep in mind that the description
@@ -221,9 +219,9 @@
 
 
 
-                    <br><br>
+     
                 </div>
-                <center style="display: flex; justify-content: space-around">
+                <center class="bottem-buttons">
                     <button class="base-style standard-style big-style " type="button" onclick="showPart(2)"> Administrative</button>
                     <button class="base-style standard-style big-style " type="button" onclick="showPart(3)"> Structural</button>
                     <button class="base-style standard-style big-style " type="button" onclick="showPart(4)"> Descriptive</button>
@@ -231,7 +229,7 @@
             </div>
 
             <div class="form" id="part2" style="display: none;">
-                <h3>Addministrative</h3>
+                <h2>Addministrative</h2>
                 Administrative metadata are collected for the effective operation and management of data
                 storage and catalogues. This administrative information, covering various topics, is stored
                 along with the datasets. From a FOT data re-use perspective, the key role of administrative
@@ -339,7 +337,9 @@
                                 id="administrative_description_1"></textarea>
                         </div>
                         <center id="add_question_button">
-                            <button class="base-style standard-style big-style " onclick="addQuestion(this.id)"
+                            <button class="base-style 
+                            white-style 
+                            big-style " onclick="addQuestion(this.id)"
                                 id="administrative_button_1">Add process</button>
                         </center>
                     </div>
@@ -349,8 +349,8 @@
                 </div>
 
 
-                <br><br>
-                <center style="display: flex; justify-content: space-around">
+ 
+                <center class="bottem-buttons">
                     <button class="base-style standard-style big-style " type="button" onclick="showPart(1)"> Summary
                     </button>
                     <button class="base-style standard-style big-style " type="button" onclick="downloadYAMLFile('Administrative')"> Download
@@ -359,7 +359,7 @@
             </div>
 
             <div class="form" id="part3" style="display: none;">
-                <h3>Structural</h3>
+                <h2>Structural</h2>
                 Structural metadata are used to describe how the data are structured in relation to other
                 data. Data are organized into a system (e.g., a database and/or file system), a structure or
                 database schema and a data content format. The aim of structural metadata is to facilitate
@@ -439,7 +439,9 @@
                                 id="structural_description_1"></textarea>
                         </div>
                         <center id="add_question_button">
-                            <button class="base-style standard-style big-style " onclick="addQuestion(this.id)" 
+                            <button class="base-style 
+                            white-style 
+                            big-style " onclick="addQuestion(this.id)" 
                             id="structural_button_1">Add
                                 pair</button>
                         </center>
@@ -451,8 +453,8 @@
                 </div>
 
 
-                <br><br>
-                <center style="display: flex; justify-content: space-around">
+ 
+                <center class="bottem-buttons">
                     <button class="base-style standard-style big-style " type="button" onclick="showPart(1)"> Summary
                     </button>
                     <button class="base-style standard-style big-style " type="button" onclick="downloadYAMLFile('Structural')"> Download
@@ -461,7 +463,7 @@
             </div>
 
             <div class="form" id="part4" style="display: none;">
-                <h3>Descriptive</h3>
+                <h2>Descriptive</h2>
                 Descriptive metadata shall include detailed information needed to understand each part of a
                 dataset. The purpose is to describe the dataset and build trust in it, by providing not only the
                 characteristics of each measure or component, but also information about how the data were
@@ -542,12 +544,14 @@
                     </div>
 
                     <center id="add_atribute_button">
-                        <button class="base-style standard-style big-style " onclick="addAtribute(this.id)"
+                        <button class="base-style 
+                        white-style 
+                        big-style " onclick="addAtribute(this.id)"
                             id="field_dummy_button_dummy">Add atribute</button>
                     </center>
                 </div>
 
-                <div id="descriptive">
+                <div id="descriptive" style="margin-bottom: 12px;">
                     <div class="question" id="field_1">
                         <input class="text-input-field" type="text" placeholder="Field" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = 'Field'" style="margin-bottom: 12px;" id="field_key_1"><br>
@@ -587,18 +591,22 @@
                                 id="field_1_information_1"></textarea>
                         </div>
                         <center id="add_atribute_button">
-                            <button class="base-style standard-style big-style " onclick="addAtribute(this.id)"
+                            <button class="base-style 
+                            white-style 
+                            big-style " onclick="addAtribute(this.id)"
                                 id="field_1_button_1">Add atribute</button>
                         </center>
                     </div>
                     <center id="add_field_button">
-                        <button class="base-style standard-style big-style " onclick="addField(this.id)"
+                        <button class="base-style 
+                        white-style 
+                        big-style " onclick="addField(this.id)"
                             id="button_1">Add field</button>
                     </center>
                 </div>
 
-                <br><br>
-                <center style="display: flex; justify-content: space-around">
+ 
+                <center class="bottem-buttons">
                     <button class="base-style standard-style big-style " type="button" onclick="showPart(1)"> Summary
                     </button>
                     <button class="base-style standard-style big-style " type="button" onclick="downloadYAMLFile('Descriptive')"> Download

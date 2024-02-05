@@ -300,19 +300,26 @@ body {
 .progress-bar-item {
     flex: 1;
     height: 40px;
-    background-color: #ddd;
-    border: 1px solid #ccc;
+    background-color: #fff;
+    border-top: 1px solid gray;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 700;
+    color: #3C3DA7
 }
 
 .progress-bar-item.active {
-    background-color: #3c3ea7;
-    border: 1px solid #3c3ea7;
-    color: white
+    color: white;
+    font-weight: 900;
+    color: #2c2f7c;
+}
+
+.progress-bar-item:hover {
+    color: #376cdd
 }
 
 .form-container {
@@ -323,9 +330,8 @@ body {
 }
 
 .form-group {
-    background-color: #3c3ea769;
     border-radius: 8px;
-    border: 1px solid #000
+
 }
 
 .form {
@@ -337,14 +343,18 @@ body {
 .question {
     padding: 24px;
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(60,61,167,0.2);
     margin-bottom: 12px;
     border: 1px solid #000;
     position: relative;
 }
 
 .question-label {
-    margin-bottom: 12px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-right: 1rem;
+    color: #3C3DA7;
+    display: inline-block
 }
 
 textarea {
@@ -364,7 +374,14 @@ textarea {
     position: absolute;
     top: 0;
     right: 0;
-    background-color: red;
+    background-color: rgb(185 12 12);
     padding-left: 12px;
     padding-right: 12px;
+}
+
+.bottem-buttons {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 12px;
+    border-top: 1px solid gray;
 }
