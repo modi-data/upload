@@ -82,11 +82,79 @@ descriptive:
 ${descriptive}
 `
     return yamlContent;
-    
+
 }
 
 function downloadYAMLFile(metadataType) {
-    const summary = getSummray()
+    const summary = getSummray();
+    const yamlContent = generateFile(metadataType, summary);
+
+    filename = 'filename.yml';
+    contentType = 'text/yaml';
+    const blob = new Blob([yamlContent], { type: contentType });
+
+    const a = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(() => {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);
+    }, 0);
+}
+
+async function initiateGitHubOAuth() {
+    const clientId = 'b9de7bfea9e345797983'; // Replace with your actual GitHub OAuth client ID
+    const redirectUri = 'http://localhost:3000/callback';
+    const scope = 'repo';
+  
+    const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
+    
+    try {
+      window.location.href = oauthUrl;
+    } catch (error) {
+      console.error('Error initiating OAuth flow:', error);
+    }
+  }
+  
+  
+
+async function uploadYAMLFile(metadataType) {
+    const summary = getSummray();
+    const yamlContent = generateFile(metadataType, summary);
+
+    filename = 'filename.yml';
+    contentType = 'text/yaml';
+    const blob = new Blob([yamlContent], { type: contentType });
+    const accessToken = await fetch('http://localhost:3000/login/github')
+
+                         .then(response => response.text());
+
+  const formData = new FormData();
+  formData.append('file', blob, 'filename.yml');
+
+  const response = await fetch('https://api.github.com/repos/modi-data/datagen-test/contents/upload/filename.yml', {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      message: 'Upload filename.yml',
+      content: btoa(yamlContent),
+    }),
+  });
+
+  if (response.ok) {
+    console.log('File uploaded successfully');
+  } else {
+    console.error('Error uploading file');
+  }
+}
+
+function generateFile(metadataType, summary) {
     var yamlContent = `# This metadata format is based on the FOT-Net Data Sharing Framework (DSF).
 # The DSF can be consulted if anything is unclear; each section in the format is directly
 # or indirectly based on a section in the DSF document.
@@ -127,7 +195,7 @@ ${process}`
 # described."
 structural:
 ${structural}
-`        
+`
     } else if (metadataType === "Descriptive") {
         const descriptive = getDescriptive()
         yamlContent += `# 5.3.1 Descriptive metadata
@@ -170,22 +238,8 @@ descriptive:
     fields:
 ${descriptive}
 `
- };
-
-    filename = 'filename.yml';
-    contentType = 'text/yaml';
-    const blob = new Blob([yamlContent], { type: contentType });
-
-    const a = document.createElement('a');
-    const url = URL.createObjectURL(blob);
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    setTimeout(() => {
-        document.body.removeChild(a);
-        window.URL.revokeObjectURL(url);
-    }, 0);
+    };
+    return yamlContent;
 }
 
 function splitTextByLength(text, maxLength) {
@@ -518,7 +572,7 @@ function getDescriptive() {
                 }
 
                 const attributes = fieldElement.querySelector('#add_atribute_button').querySelector('button').id.split('_')[3];
-                
+
                 for (let j = 1; j <= attributes; j++) {
                     const attributeElement = document.getElementById(`field_${i}_key_${j}`);
                     const informationElement = document.getElementById(`field_${i}_information_${j}`);
@@ -526,7 +580,7 @@ function getDescriptive() {
                     if (attributeElement && informationElement) {
                         const atributekey = attributeElement.value;
                         const atributeInformation = splitTextByLength(informationElement.value, 85);
-                        
+
                         // Check if both key and description have values before adding to the process object
                         if (atributekey.trim() !== '' && atributeInformation.trim() !== '') {
                             field[atributekey] = atributeInformation;
