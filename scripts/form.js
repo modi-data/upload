@@ -1,26 +1,23 @@
 /**
- * Show a specific part and update the progress bar.
+ * Show a specific part, update the progress bar, adjust textarea heights, and scroll to the top of the page.
  *
  * @param {number} partNumber - The number of the part to show
  * @return {void} 
  */
 function showPart(partNumber) {
-    // Loop through the parts
-    for (let i = 1; i <= 4; i++) {
-        // Show or hide the current part based on the partNumber
-        if (i === partNumber) {
-            document.getElementById(`part${i}`).style.display = 'block';
-        } else {
-            document.getElementById(`part${i}`).style.display = 'none';
-        }
+    const totalParts = 4;
+
+    for (let i = 1; i <= totalParts; i++) {
+        const partElement = document.getElementById(`part${i}`);
+        const shouldDisplay = i === partNumber;
+        partElement.style.display = shouldDisplay ? 'block' : 'none';
     }
-    // Update the progress bar
+
     updateProgressBar(partNumber);
 
-    // Automatically adjust the height of textareas in the current part
-    document.getElementById(`part${partNumber}`).querySelectorAll('textarea').forEach(autoGrow);
+    const currentPartTextarea = document.getElementById(`part${partNumber}`).querySelectorAll('textarea');
+    currentPartTextarea.forEach(autoGrow);
 
-    // Scroll to the top of the page
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -31,9 +28,7 @@ function showPart(partNumber) {
  * @return {void} 
  */
 function updateProgressBar(currentStep) {
-    // Select all progress bar items
     const progressBarItems = document.querySelectorAll('.progress-bar-item');
-    // Loop through each item to update its active status based on the current step
     progressBarItems.forEach((item, index) => {
         if (index + 1 === currentStep) {
             item.classList.add('active');
@@ -46,12 +41,11 @@ function updateProgressBar(currentStep) {
 /**
  * Sets the height of the given element to accommodate its content using the auto-grow technique.
  *
- * @param {Element} element - The element whose height needs to be adjusted.
+ * @param {Element} elem - The element whose height needs to be adjusted.
  * @return {void} 
  */
-function autoGrow(element) {
-    element.style.height = "5px";
-    element.style.height = Math.max((element.scrollHeight + 5), 42) + "px";
+function autoGrow(elem) {
+    elem.style.height = Math.max(elem.scrollHeight + 5, 42) + "px";
 }
 
 /**
@@ -63,13 +57,13 @@ function autoGrow(element) {
  */
 function addQuestion(previousButtonId, add = true) {
     // Extract page and id number from the previous button id
-    var page = previousButtonId.split('_')[0];
-    var previousIdNumber = parseInt(previousButtonId.split('_')[2]);
-    var newIdNumber = previousIdNumber + 1;
+    const page = previousButtonId.split('_')[0];
+    const previousIdNumber = parseInt(previousButtonId.split('_')[2]);
+    const newIdNumber = previousIdNumber + 1;
 
     // Clone the base question
-    var baseQuestion = document.getElementById(`${page}_question_1`);
-    var newQuestion = baseQuestion.cloneNode(true);
+    const baseQuestion = document.getElementById(`${page}_question_1`);
+    const newQuestion = baseQuestion.cloneNode(true);
 
     // Update id, key, and description of the new question
     newQuestion.id = page + "_question_" + newIdNumber;
@@ -85,62 +79,49 @@ function addQuestion(previousButtonId, add = true) {
     baseQuestion.parentElement.querySelector(`#${page}_button_${previousIdNumber}`).id = `${page}_button_${newIdNumber}`;
 
     // Insert the new question before the add question button
-    var button = baseQuestion.parentElement.querySelector('#add_question_button'); 
+    const button = baseQuestion.parentElement.querySelector('#add_question_button'); 
     baseQuestion.parentNode.insertBefore(newQuestion, button);
     
     // If add flag is true, increase the question count and save form data
     if (add) {
-        var amount = parseInt(localStorage.getItem(page)) + 1 || 1;
+        const amount = parseInt(localStorage.getItem(page)) + 1 || 1;
         localStorage.setItem(`${page}`, JSON.stringify(amount));
         saveFormData();
     }
 }
 
 /**
- * Function to add a new Attribute to the form.
+ * Function to add a new attribute to the form.
  *
  * @param {string} previousButtonId - The id of the previous button
- * @param {boolean} add - Flag to indicate whether this call increases the number of Attributes
+ * @param {boolean} add - Flag to indicate whether this call increases the number of attributes (default is true)
  * @return {void}
  */
 function addAttribute(previousButtonId, add = true) {
-    // Extract the field number from the previousButtonId
-    var field = previousButtonId.split('_')[1];
+    // Extracting field and attribute numbers from the button id
+    const field = previousButtonId.split('_')[1];
+    const previousAttributeIdNumber = parseInt(previousButtonId.split('_')[3]);
+    const attributeIdNumber = previousAttributeIdNumber + 1;
+    
+    // Generating the new attribute id and getting the lead attribute and the new attribute node
+    const leadAttributeId = `field_${field}_Attribute_1`;
+    const leadAttribute = document.getElementById(leadAttributeId);
+    const newAttribute = document.getElementById('field_dummy_Attribute_dummy').cloneNode(true);
 
-    // Extract the previous AttributeIdNumber from the previousButtonId
-    var PreviousAttributeIdNumber = parseInt(previousButtonId.split('_')[3]);
-
-    // Increment the previous AttributeIdNumber to get the new AttributeIdNumber
-    var AttributeIdNumber = PreviousAttributeIdNumber + 1;
-
-    // Construct the id of the first Attribute in the field
-    var leadAttributeId = `field_${field}_Attribute_1`;
-
-    // Get the leadAttribute element using the leadAttributeId and create a newAttribute element
-    var leadAttribute = document.getElementById(leadAttributeId);
-    var newAttribute = document.getElementById('field_dummy_Attribute_dummy').cloneNode(true);
-
-    // Set the id of the newAttribute using the new AttributeIdNumber and updating the ids of the key and information inputs
-    newAttribute.id = `field_${field}_Attribute_${AttributeIdNumber}`;
-    newAttribute.querySelector(`#field_dummy_key_dummy`).id = `field_${field}_key_${AttributeIdNumber}`;
-    newAttribute.querySelector(`#field_dummy_information_dummy`).id = `field_${field}_information_${AttributeIdNumber}`;
-
-    // Make the newAttribute visible
+    // Setting the new attribute id and updating the ids and display for key, information, and delete button
+    newAttribute.id = `field_${field}_Attribute_${attributeIdNumber}`;
+    newAttribute.querySelector(`#field_dummy_key_dummy`).id = `field_${field}_key_${attributeIdNumber}`;
+    newAttribute.querySelector(`#field_dummy_information_dummy`).id = `field_${field}_information_${attributeIdNumber}`;
     newAttribute.style.display = '';
-
-    // Make the delete button in the newAttribute visible
     newAttribute.querySelector(`#delete_button`).style.display = '';
+    leadAttribute.parentElement.querySelector(`#field_${field}_button_${previousAttributeIdNumber}`).id = `field_${field}_button_${attributeIdNumber}`;
 
-    // Update the id of the button for the previous Attribute to the new AttributeIdNumber
-    leadAttribute.parentElement.querySelector(`#field_${field}_button_${PreviousAttributeIdNumber}`).id = `field_${field}_button_${AttributeIdNumber}`;
-
-    // Get the button to add a new Attribute and insert the newAttribute before the add button
-    var button = leadAttribute.parentElement.querySelector('#add_Attribute_button');
+    // Inserting the new attribute before the add button and updating the local storage if add flag is true
+    const button = leadAttribute.parentElement.querySelector('#add_Attribute_button');
     leadAttribute.parentNode.insertBefore(newAttribute, button);
     
-    // If add is true, update the number of Attributes in the localStorage and save the form data
     if (add) {
-        var amount = parseInt(localStorage.getItem(`field_${field}_Attributes`)) + 1 || 1;
+        const amount = parseInt(localStorage.getItem(`field_${field}_Attributes`)) + 1 || 1;
         localStorage.setItem(`field_${field}_Attributes`, JSON.stringify(amount));
         saveFormData();
     }
@@ -155,11 +136,11 @@ function addAttribute(previousButtonId, add = true) {
  */
 function addField(previousButtonId, add = true) {
     // Extract the number from the previous button id
-    var previousFieldIdNumber = previousButtonId.split('_')[1];
-    var newFieldIdNumber = parseInt(previousFieldIdNumber) + 1;
+    const previousFieldIdNumber = previousButtonId.split('_')[1];
+    const newFieldIdNumber = parseInt(previousFieldIdNumber) + 1;
 
     // Clone the dummy field template
-    var newField = document.getElementById('field_dummy').cloneNode(true);
+    const newField = document.getElementById('field_dummy').cloneNode(true);
 
     // Update the ids of the cloned field and its child elements
     newField.id = `field_${newFieldIdNumber}`;
@@ -174,8 +155,8 @@ function addField(previousButtonId, add = true) {
     newField.style.display = '';
 
     // Get the descriptive element and the add field button
-    var descriptive_element = document.getElementById('descriptive');
-    var button = document.getElementById('add_field_button');
+    const descriptive_element = document.getElementById('descriptive');
+    const button = document.getElementById('add_field_button');
 
     // Update the id of the previous button and insert the new field before the add field button
     descriptive_element.querySelector(`#button_${previousFieldIdNumber}`).id = `button_${newFieldIdNumber}`;
@@ -183,7 +164,7 @@ function addField(previousButtonId, add = true) {
 
     // If add flag is true, update the local storage and save form data
     if (add) {
-        var amount = parseInt(localStorage.getItem('fields')) + 1 || 1;
+        const amount = parseInt(localStorage.getItem('fields')) + 1 || 1;
         localStorage.setItem('fields', JSON.stringify(amount));
         saveFormData();
     }
@@ -203,20 +184,20 @@ function deleteParent() {
     const parentElement = clickedButton.parentElement;
 
     // Get the page from the parent element id
-    var page = parentElement.id.split('_')[0];
+    const page = parentElement.id.split('_')[0];
 
     // Update local storage based on the page and element type
     if (page === "field") {
         if (parentElement.id.split('_')[2] === "Attribute") {
-            var field = parentElement.id.split('_')[1]
-            var amount = parseInt(localStorage.getItem(`field_${field}_Attributes`)) - 1;
+            const field = parentElement.id.split('_')[1]
+            const amount = parseInt(localStorage.getItem(`field_${field}_Attributes`)) - 1;
             localStorage.setItem(`field_${field}_Attributes`, JSON.stringify(amount));
         } else {
-            var amount = parseInt(localStorage.getItem('fields')) - 1;
+            const amount = parseInt(localStorage.getItem('fields')) - 1;
             localStorage.setItem('fields', JSON.stringify(amount));
         }
     } else {
-        var amount = parseInt(localStorage.getItem(page)) - 1;
+        const amount = parseInt(localStorage.getItem(page)) - 1;
         localStorage.setItem(page, JSON.stringify(amount));
     }
 
@@ -266,22 +247,22 @@ function saveFormData() {
  */
 function loadFormData() {
     // Load and populate added fields in the administrative section
-    var administrativeProcesses = JSON.parse(localStorage.getItem('administrative'));
+    const administrativeProcesses = JSON.parse(localStorage.getItem('administrative'));
     for (let i = 1; i <= administrativeProcesses; i++) {
         addQuestion(`administrative_button_${i}`, false);
     }
 
     // Load and populate added keys in the structural section
-    var structuralAddKeys = JSON.parse(localStorage.getItem('structural'));
+    const structuralAddKeys = JSON.parse(localStorage.getItem('structural'));
     for (let i = 1; i <= structuralAddKeys; i++) {
         addQuestion(`structural_button_${i}`, false);
     }
 
     // Load and populate fields and their attributes
-    var fieldsCount = JSON.parse(localStorage.getItem('fields'));
+    const fieldsCount = JSON.parse(localStorage.getItem('fields'));
     for (let i = 1; i <= fieldsCount; i++) {
         addField(`button_${i}`, false);
-        var attributesCount = JSON.parse(localStorage.getItem(`field_${i}_attributes`));
+        const attributesCount = JSON.parse(localStorage.getItem(`field_${i}_attributes`));
         for (let j = 1; j <= attributesCount; j++) {
             addAttribute(`field_${i}_button_${j}`, false);
         }

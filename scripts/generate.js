@@ -1,19 +1,15 @@
 /**
  * Generates a YAML file with metadata based on the FOT-Net Data Sharing Framework (DSF).
- * The metadata includes summary, administrative, process, structural, and descriptive information.
+ * The metadata includes all parts.
  * 
  * @returns {string} The YAML content with the metadata.
  */
 function generateYAMLFile() {
-    // Get summary metadata
+    // Get all the metadata
     const summary = getSummray()
-    // Get administrative metadata
     const administrative = getAdministrative()
-    // Get process metadata
     const process = getProcesses()
-    // Get structural metadata
     const structural = getStructural()
-    // Get descriptive metadata
     const descriptive = getDescriptive()
 
     // Construct the YAML content
