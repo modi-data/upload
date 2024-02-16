@@ -1,11 +1,22 @@
+/**
+ * Generates a YAML file with metadata based on the FOT-Net Data Sharing Framework (DSF).
+ * The metadata includes summary, administrative, process, structural, and descriptive information.
+ * 
+ * @returns {string} The YAML content with the metadata.
+ */
 function generateYAMLFile() {
-
+    // Get summary metadata
     const summary = getSummray()
+    // Get administrative metadata
     const administrative = getAdministrative()
+    // Get process metadata
     const process = getProcesses()
+    // Get structural metadata
     const structural = getStructural()
+    // Get descriptive metadata
     const descriptive = getDescriptive()
 
+    // Construct the YAML content
     const yamlContent =
         `# This metadata format is based on the FOT-Net Data Sharing Framework (DSF).
 # The DSF can be consulted if anything is unclear; each section in the format is directly
@@ -82,79 +93,52 @@ descriptive:
 ${descriptive}
 `
     return yamlContent;
-
 }
 
+/**
+ * Download a YAML file based on the given metadata type
+ * 
+ * @param {string} metadataType - The type of metadata to be used for generating the YAML file
+ * @returns {void}
+ */
 function downloadYAMLFile(metadataType) {
-    const summary = getSummray();
+    // Get the summary of the metadata
+    const summary = getSummary();
+    
+    // Generate the YAML content based on the metadata type and summary
     const yamlContent = generateFile(metadataType, summary);
 
-    filename = 'filename.yml';
-    contentType = 'text/yaml';
+    // Set the filename and content type for the downloaded file
+    const filename = 'filename.yml';
+    const contentType = 'text/yaml';
+
+    // Create a Blob containing the YAML content with the specified content type
     const blob = new Blob([yamlContent], { type: contentType });
 
+    // Create a link element to trigger the download
     const a = document.createElement('a');
     const url = URL.createObjectURL(blob);
     a.href = url;
     a.download = filename;
     document.body.appendChild(a);
     a.click();
+
+    // Clean up by removing the link and revoking the URL object after the download
     setTimeout(() => {
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
     }, 0);
 }
 
-async function initiateGitHubOAuth() {
-    const clientId = 'b9de7bfea9e345797983'; // Replace with your actual GitHub OAuth client ID
-    const redirectUri = 'http://localhost:3000/callback';
-    const scope = 'repo';
-  
-    const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}`;
-    
-    try {
-      window.location.href = oauthUrl;
-    } catch (error) {
-      console.error('Error initiating OAuth flow:', error);
-    }
-  }
-  
-  
-
-async function uploadYAMLFile(metadataType) {
-    const summary = getSummray();
-    const yamlContent = generateFile(metadataType, summary);
-
-    filename = 'filename.yml';
-    contentType = 'text/yaml';
-    const blob = new Blob([yamlContent], { type: contentType });
-    const accessToken = await fetch('http://localhost:3000/login/github')
-
-                         .then(response => response.text());
-
-  const formData = new FormData();
-  formData.append('file', blob, 'filename.yml');
-
-  const response = await fetch('https://api.github.com/repos/modi-data/datagen-test/contents/upload/filename.yml', {
-    method: 'PUT',
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      message: 'Upload filename.yml',
-      content: btoa(yamlContent),
-    }),
-  });
-
-  if (response.ok) {
-    console.log('File uploaded successfully');
-  } else {
-    console.error('Error uploading file');
-  }
-}
-
+/**
+ * Generate a YAML file with metadata based on the provided metadata type and summary.
+ * 
+ * @param {string} metadataType - The type of metadata: "Administrative", "Structural", or "Descriptive".
+ * @param {string} summary - A thorough description of the study design and execution.
+ * @returns {string} - The generated YAML content.
+ */
 function generateFile(metadataType, summary) {
+    // Initialize the YAML content with a header and the provided summary
     var yamlContent = `# This metadata format is based on the FOT-Net Data Sharing Framework (DSF).
 # The DSF can be consulted if anything is unclear; each section in the format is directly
 # or indirectly based on a section in the DSF document.
@@ -168,13 +152,14 @@ function generateFile(metadataType, summary) {
 summary:
 ${summary}
 
-`
+`;
 
+    // Append specific metadata based on the provided metadata type
     if (metadataType === "Administrative") {
-        const administrative = getAdministrative()
-        const process = getProcesses()
-        yamlContent += `
-# 5.3.3 Administrative metadata
+        // Get administrative and process metadata
+        const administrative = getAdministrative();
+        const process = getProcesses();
+        yamlContent += `# 5.3.3 Administrative metadata
 # "Administrative metadata are collected for the effective operation and management of data
 # storage and catalogues. This administrative information, covering various topics, is stored
 # along with the datasets. From a FOT data re-use perspective, the key role of administrative
@@ -182,9 +167,10 @@ ${summary}
 administrative:
 ${administrative}
 
-${process}`
+${process}`;
     } else if (metadataType === "Structural") {
-        const structural = getStructural()
+        // Get structural metadata
+        const structural = getStructural();
         yamlContent += `# 5.3.2 Structural metadata
 # "Structural metadata are used to describe how the data are structured in relation to other
 # data. Data are organized into a system (e.g., a database and/or file system), a structure or
@@ -195,9 +181,10 @@ ${process}`
 # described."
 structural:
 ${structural}
-`
+`;
     } else if (metadataType === "Descriptive") {
-        const descriptive = getDescriptive()
+        // Get descriptive metadata
+        const descriptive = getDescriptive();
         yamlContent += `# 5.3.1 Descriptive metadata
 # "Descriptive metadata shall include detailed information needed to understand each part of a
 # dataset. The purpose is to describe the dataset and build trust in it—by providing not only the
@@ -237,40 +224,60 @@ descriptive:
     
     fields:
 ${descriptive}
-`
-    };
+`;
+    }
     return yamlContent;
 }
 
+/**
+ * Splits the input text into lines of maximum length
+ * 
+ * @param {string} text - The input text to be split
+ * @param {number} maxLength - The maximum length of each line
+ * @returns {string} - The text split into lines of maximum length
+ */
 function splitTextByLength(text, maxLength) {
+    // If input text is empty, return "N/A"
     if (!text) return "N/A";
 
+    // Split the text into words
     let words = text.split(' ');
     let lines = [];
     let currentLine = '';
 
+    // Iterate through each word to create lines of maximum length
     for (const word of words) {
+        // Check if adding the word to the current line exceeds the maximum length
         if ((currentLine + word).length <= maxLength) {
+            // If not, add the word to the current line
             currentLine += word + ' ';
         } else {
+            // If adding the word exceeds the maximum length, push the current line to the lines array and start a new line
             lines.push(currentLine.trim());
             currentLine = word + ' ';
         }
     }
 
+    // Push the last line to the lines array
     if (currentLine) {
         lines.push(currentLine.trim());
     }
 
+    // Join the lines with newline characters and return the result
     return lines.join('\n');
 }
 
-// {-------------------------------------------}
+// {-------------------------------------------------------------------}
 // After this are all functions that get the data from the input fields.
 
-function getSummray() {
-    const summaryRaw =
-    {
+/**
+ * Generates a summary of the collected data and its metadata.
+ * 
+ * @returns {string} - The generated summary with comments.
+ */
+function generateSummary() {
+    // Define the raw data for the summary
+    const summaryRaw = {
         why_was_it_collected: splitTextByLength(document.getElementById('why_was_it_collected').value, 85),
         how_was_the_collection_executed: splitTextByLength(document.getElementById('how_was_the_collection_executed').value, 85),
         objectives: splitTextByLength(document.getElementById('objectives').value, 85),
@@ -286,6 +293,7 @@ function getSummray() {
         dataset_example: splitTextByLength(document.getElementById('dataset_example').value, 300)
     };
 
+    // Generate comments for each data entry
     const summaryComments = Object.entries(summaryRaw).map(([key, value]) => {
         let comment = '';
         let separator = ': ';
@@ -301,12 +309,12 @@ function getSummray() {
                 break;
             case 'data_area':
                 comment =
-                    `  # Which are the data are from. Can be an exact coordinate, a polygon, a town name, a country name, etc.
+                    `  # Which area the data is from. Can be an exact coordinate, a polygon, a town name, a country name, etc.
   # If providing coordinates/polygons, it must be encoded as WKT with an SRID of 4326.`;
                 break;
             case 'data_type':
                 comment =
-                    `  # Which type of data this is.
+                    `  # The type of data this is.
   # Must be one or more of:
   #     survey, interviews, mobile network, itsg5, lane markings, signage, physical road infrastructure,
   #     speed/acceleration, video, pictures, gnss, lidar, radar, weather, vehicle probe data, events, other.
@@ -314,7 +322,7 @@ function getSummray() {
                 break;
             case 'modi_use_case':
                 comment =
-                    `  # Which of the use cases in MODI this dataset is related to.
+                    `  # The use case in MODI this dataset is related to.
   # Must be one of: UCNL, UCGE, UCSE, UCNO, UCCCAM, Other tasks`;
                 break;
             case 'dataset_size':
@@ -327,31 +335,31 @@ function getSummray() {
                 break;
         }
 
-
         // New line after comments
         if (comment != '') {
             comment += '\n';
         }
 
-
-        // Add the seperator if the value consists of several lines.
-        // Also add the indice for the several lines.
+        // Add the separator if the value consists of several lines.
+        // Also add the indentation for the several lines.
         if (value.includes('\n')) {
             separator = `: |\n`;
             return `\n${comment}  ${key}${separator}${value.split('\n').map(line => `    ${line}`).join(`\n`)}`;
         } else {
             return `\n${comment}  ${key}${separator}${value.split('\n').join(`\n`)}`;
         }
-
-
     }).join('\n');
-
-
 
     return summaryComments;
 }
 
+/**
+ * Retrieves administrative information from the HTML form and formats it with comments.
+ * 
+ * @returns {string} - Formatted administrative information with comments.
+ */
 function getAdministrative() {
+    // Retrieve administrative information from the HTML form
     const administrativeRaw = {
         version_number: document.getElementById('version_number').value,
         archiving_date: document.getElementById('archiving_date').value,
@@ -364,6 +372,7 @@ function getAdministrative() {
         data_end_of_life: document.getElementById('data_end_of_life').value,
     };
 
+    // Format administrative information with comments
     const administrativeComments = Object.entries(administrativeRaw).map(([key, value]) => {
         let comment = '';
         let separator = ': ';
@@ -410,7 +419,6 @@ function getAdministrative() {
             comment += '\n';
         }
 
-
         // Adjust the separator and formatting based on the value
         if (value.includes('\n')) {
             separator = `: |\n`;
@@ -420,15 +428,20 @@ function getAdministrative() {
         }
     }).join('\n');
 
-
-
     return administrativeComments;
 }
 
+/**
+ * Retrieves processes from the DOM and formats them as a YAML string.
+ * 
+ * @returns {string} - The formatted YAML string describing the processes.
+ */
 function getProcesses() {
     const processElement = document.getElementById('process');
     const amount = processElement.querySelector('#add_question_button').querySelector('button').id.split('_')[2];
 
+    // Retrieve key-value pairs for each process
+    const process = {};
     for (let i = 1; i <= amount; i++) {
         const keyElement = document.getElementById(`administrative_key_${i}`);
         const descriptionElement = document.getElementById(`administrative_description_${i}`);
@@ -444,12 +457,14 @@ function getProcesses() {
         }
     }
 
+    // Format the processes as a YAML string
     const processEdited = Object.entries(process).map(([key, value]) => {
         let separator = `: |\n`;
 
         return `    ${key}${separator}${value.split('\n').map(line => `      ${line}`).join(`\n`)}`;
     }).join('\n');
 
+    // Create the final YAML string with a detailed description of the processes
     const processFinal =
         `  # A more detailed description of the various processes of the data collection,
   # for example the methods/tools used to collect the data, filtering, post-processing,
@@ -464,7 +479,13 @@ ${processEdited}`
     return processFinal;
 }
 
+/**
+ * Retrieves the structural information from the input fields and constructs a formatted output with comments
+ * 
+ * @returns {string} - The formatted structural information with comments
+ */
 function getStructural() {
+    // Retrieve raw structural information from input fields
     const structuralRaw = {
         summary: splitTextByLength(document.getElementById('summary').value, 85),
         file_format: splitTextByLength(document.getElementById('file_format').value, 85),
@@ -473,9 +494,12 @@ function getStructural() {
         tool_version: splitTextByLength(document.getElementById('tool_version').value, 85),
     };
 
+    // Retrieve the amount of keys to be added
     const structuralElement = document.getElementById('add_keys_structural');
     const amount = structuralElement.querySelector('#add_question_button').querySelector('button').id.split('_')[2];
 
+    // Construct the object of additional keys and descriptions
+    const add_keys_structural = {};
     for (let i = 1; i <= amount; i++) {
         const keyElement = document.getElementById(`structural_key_${i}`);
         const descriptionElement = document.getElementById(`structural_description_${i}`);
@@ -491,6 +515,7 @@ function getStructural() {
         }
     }
 
+    // Construct comments for each raw structural information
     const structuralComments = Object.entries(structuralRaw).map(([key, value]) => {
         let comment = '';
         let separator = ': ';
@@ -504,21 +529,20 @@ function getStructural() {
             case 'file_structure':
                 comment = `  # Please describe the storage structure of the data. If it consists of flat files, the folder
   # structure and file naming can be relevant. If it is a database, a description of the relevant 
-  # tables, indices, triggers and views is important.`
+  # tables, indices, triggers and views is important.`;
                 break;
             case 'required_tools':
                 comment = `  # Which tools can be used to read the data. Especially important for non-standard formats.`;
                 break;
             case 'tool_version':
                 comment = `  # If the files were made using a specific tool, the tool name and version may be relevant
-  # for reading the data.`
+  # for reading the data.`;
         }
 
         // New line after comments
         if (comment != '') {
             comment += '\n';
         }
-
 
         // Adjust the separator and formatting based on the value
         if (value.includes('\n')) {
@@ -529,6 +553,7 @@ function getStructural() {
         }
     }).join('\n');
 
+    // Construct additional keys and descriptions
     const structuralAdd = Object.entries(add_keys_structural).map(([key, value]) => {
         let separator = ': ';
 
@@ -541,58 +566,74 @@ function getStructural() {
         }
     }).join('\n');
 
+    // Construct the final formatted structural information
     const structuralFinal = structuralComments + `\n\n  # Additional keys and values can be added here if this is a non-standard format that requires
   # a more detailed explanation.\n` + structuralAdd;
 
     return structuralFinal;
 }
 
-function getDescriptive() {
-    const descriptiveRaw = {};
+/**
+ * Function to generate a descriptive object from the form fields
+ * 
+ * @returns {string} - A formatted string representing the descriptive object
+ */
+function generateDescriptiveObject() {
+    // Initialize an empty object to store the descriptive information
+    const descriptiveObject = {};
 
+    // Get the number of fields from the 'add_field_button' element
     const descriptionElement = document.getElementById('add_field_button');
     const fields = descriptionElement.querySelector('button').id.split('_')[1];
 
+    // Iterate over each field to extract and process the information
     for (let i = 1; i <= fields; i++) {
         const field = {};
 
+        // Get the field element by its ID
         const fieldElement = document.getElementById(`field_${i}`);
 
         if (fieldElement) {
+            // Extract the key and description elements by their IDs
             const keyElement = document.getElementById(`field_key_${i}`);
             const descriptionElement = document.getElementById(`field_description_${i}`);
 
             if (keyElement && descriptionElement) {
+                // Extract and format the field key and description
                 const fieldKey = keyElement.value;
-                const fieldDescription = splitTextByLength(descriptionElement.value, 85);;
+                const fieldDescription = splitTextByLength(descriptionElement.value, 85);
 
-                // Check if both key and description have values before adding to the process object
+                // Check if both key and description have values before adding to the field object
                 if (fieldKey.trim() !== '' && fieldDescription.trim() !== '') {
                     field["description"] = fieldDescription;
                 }
 
-                const attributes = fieldElement.querySelector('#add_atribute_button').querySelector('button').id.split('_')[3];
+                // Get the number of attributes for the current field
+                const attributes = fieldElement.querySelector('#add_Attribute_button').querySelector('button').id.split('_')[3];
 
+                // Iterate over each attribute to extract and process the information
                 for (let j = 1; j <= attributes; j++) {
                     const attributeElement = document.getElementById(`field_${i}_key_${j}`);
                     const informationElement = document.getElementById(`field_${i}_information_${j}`);
 
                     if (attributeElement && informationElement) {
-                        const atributekey = attributeElement.value;
-                        const atributeInformation = splitTextByLength(informationElement.value, 85);
+                        // Extract and format the attribute key and information
+                        const attributeKey = attributeElement.value;
+                        const attributeInformation = splitTextByLength(informationElement.value, 85);
 
-                        // Check if both key and description have values before adding to the process object
-                        if (atributekey.trim() !== '' && atributeInformation.trim() !== '') {
-                            field[atributekey] = atributeInformation;
+                        // Check if both key and description have values before adding to the field object
+                        if (attributeKey.trim() !== '' && attributeInformation.trim() !== '') {
+                            field[attributeKey] = attributeInformation;
                         }
                     }
                 }
-                descriptiveRaw[fieldKey] = field;
+                // Add the processed field to the descriptive object
+                descriptiveObject[fieldKey] = field;
             }
         }
     }
 
-
+    // Function to stringify a nested object with proper indentation and formatting
     const stringifyNestedObject = (obj) => {
         const indent = '      ';
         let result = '';
@@ -616,12 +657,11 @@ function getDescriptive() {
         return result;
     };
 
-    const descriptiveFinal = Object.entries(descriptiveRaw).map(([key, value]) => {
-
+    // Convert the descriptive object to a formatted string
+    const descriptiveFinal = Object.entries(descriptiveObject).map(([key, value]) => {
         return `\n    ${key}:${stringifyNestedObject(value)}`;
-
     }).join('\n');
 
-
+    // Return the formatted string representing the descriptive object
     return descriptiveFinal;
 }
