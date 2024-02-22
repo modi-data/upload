@@ -97,15 +97,12 @@ ${descriptive}
  * @param {string} metadataType - The type of metadata to be used for generating the YAML file
  * @returns {void}
  */
-function downloadYAMLFile(metadataType) {
-    // Get the summary of the metadata
-    const summary = getSummary();
-    
+function downloadYAMLFile(metadataType) {  
     // Generate the YAML content based on the metadata type and summary
-    const yamlContent = generateFile(metadataType, summary);
+    const yamlContent = generateFile(metadataType);
 
     // Set the filename and content type for the downloaded file
-    const filename = 'filename.yml';
+    const filename = document.getElementById('filename');
     const contentType = 'text/yaml';
 
     // Create a Blob containing the YAML content with the specified content type
