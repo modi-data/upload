@@ -133,7 +133,8 @@ function downloadYAMLFile(metadataType) {
  * @param {string} summary - A thorough description of the study design and execution.
  * @returns {string} - The generated YAML content.
  */
-function generateFile(metadataType, summary) {
+function generateFile(metadataType) {
+    const summary = generateSummary();
     // Initialize the YAML content with a header and the provided summary
     var yamlContent = `# This metadata format is based on the FOT-Net Data Sharing Framework (DSF).
 # The DSF can be consulted if anything is unclear; each section in the format is directly
@@ -153,8 +154,8 @@ ${summary}
     // Append specific metadata based on the provided metadata type
     if (metadataType === "Administrative") {
         // Get administrative and process metadata
-        const administrative = getAdministrative();
-        const process = getProcesses();
+        const administrative = generateAdministrative();
+        const process = generateProcesses();
         yamlContent += `# 5.3.3 Administrative metadata
 # "Administrative metadata are collected for the effective operation and management of data
 # storage and catalogues. This administrative information, covering various topics, is stored
@@ -166,7 +167,7 @@ ${administrative}
 ${process}`;
     } else if (metadataType === "Structural") {
         // Get structural metadata
-        const structural = getStructural();
+        const structural = generateStructural();
         yamlContent += `# 5.3.2 Structural metadata
 # "Structural metadata are used to describe how the data are structured in relation to other
 # data. Data are organized into a system (e.g., a database and/or file system), a structure or
@@ -180,7 +181,7 @@ ${structural}
 `;
     } else if (metadataType === "Descriptive") {
         // Get descriptive metadata
-        const descriptive = getDescriptive();
+        const descriptive = generateDescriptive();
         yamlContent += `# 5.3.1 Descriptive metadata
 # "Descriptive metadata shall include detailed information needed to understand each part of a
 # dataset. The purpose is to describe the dataset and build trust in it—by providing not only the
@@ -264,7 +265,7 @@ function splitTextByLength(text, maxLength) {
 }
 
 // {-------------------------------------------------------------------}
-// After this are all functions that get the data from the input fields.
+// After this are all functions thatgenerate the data from the input fields.
 
 /**
  * Generates a summary of the collected data and its metadata.
@@ -354,7 +355,7 @@ function generateSummary() {
  * 
  * @returns {string} - Formatted administrative information with comments.
  */
-function getAdministrative() {
+function generateAdministrative() {
     // Retrieve administrative information from the HTML form
     const administrativeRaw = {
         version_number: document.getElementById('version_number').value,
@@ -432,7 +433,7 @@ function getAdministrative() {
  * 
  * @returns {string} - The formatted YAML string describing the processes.
  */
-function getProcesses() {
+function generateProcesses() {
     const processElement = document.getElementById('process');
     const amount = processElement.querySelector('#add_question_button').querySelector('button').id.split('_')[2];
 
@@ -480,7 +481,7 @@ ${processEdited}`
  * 
  * @returns {string} - The formatted structural information with comments
  */
-function getStructural() {
+function generateStructural() {
     // Retrieve raw structural information from input fields
     const structuralRaw = {
         summary: splitTextByLength(document.getElementById('summary').value, 85),
@@ -574,7 +575,7 @@ function getStructural() {
  * 
  * @returns {string} - A formatted string representing the descriptive object
  */
-function generateDescriptiveObject() {
+function generateDescriptive() {
     // Initialize an empty object to store the descriptive information
     const descriptiveObject = {};
 
