@@ -42,9 +42,8 @@ function uploadYAMLFile(metadataType) {
     const filename = document.getElementById('filename').value;
 
     const clientId = 'b9de7bfea9e345797983';
-    const redirectUri = 'http://localhost:3000/oauth/callback';
     const scope = 'repo';
-    const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scope}&state=${filename}`;
+    const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=${scope}&state=${filename}`;
 
 
       fetch('http://localhost:3000/fileUpload', {
