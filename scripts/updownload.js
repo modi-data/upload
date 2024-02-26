@@ -4,7 +4,7 @@
  * @param {string} metadataType - The type of metadata to be used for generating the YAML file
  * @returns {void}
  */
-function downloadYAMLFile(metadataType) {  
+function downloadYAMLFile(metadataType) {
     // Generate the YAML content based on the metadata type and summary
     const yamlContent = generateFile(metadataType);
 
