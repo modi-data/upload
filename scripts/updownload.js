@@ -42,11 +42,10 @@ function downloadYAMLFile(metadataType) {
   }, 0);
 }
 
+
 /**
- * Upload a YAML file based on the given metadata type
- * 
- * @param {string} metadataType - The type of metadata to be used for generating the YAML file
- * @returns {void}
+ * Uploads a YAML file to a server and opens the GitHub OAuth authorization page.
+ * @param {string} metadataType - The type of metadata.
  */
 function uploadYAMLFile(metadataType) {
   // Check if the form is properly filled.
@@ -79,6 +78,13 @@ function uploadYAMLFile(metadataType) {
 }
 
 
+/**
+ * Checks the fields in the specified part of the form for validity.
+ * Resets error messages, checks required fields, and validates field formats.
+ * If any errors are found, displays error messages and highlights the invalid fields.
+ * @param {number} partNumber - The part number of the form section to check.
+ * @returns {boolean} - Returns true if all fields are valid, false otherwise.
+ */
 function checkFields(partNumber) {
   // Resetting error messages
   var errorMessages = document.querySelectorAll('.error');
@@ -142,6 +148,11 @@ function checkFields(partNumber) {
   }
 }
 
+/**
+ * Appends an error message to a field.
+ * @param {HTMLElement} field - The field to append the error message to.
+ * @param {string} [message='Please fill this in'] - The error message to display.
+ */
 function appendErrorMessage(field, message = 'Please fill this in') {
   var errorMessageWrapper = document.createElement('div');
   errorMessageWrapper.setAttribute('data-qa', 'error-message-visible-error-wrapper');
@@ -168,6 +179,12 @@ function appendErrorMessage(field, message = 'Please fill this in') {
   field.parentNode.appendChild(errorMessageWrapper);
 }
 
+/**
+ * Checks if the given value is in a valid format.
+ * 
+ * @param {string} value - The value to be checked.
+ * @returns {boolean} - Returns true if the value is in a valid format, false otherwise.
+ */
 function isValidFormat(value) {
   // Regular expression to match lowercase letter followed by lowercase letters, uppercase letters, or "_"
   var regex = /^[a-z][a-zA-Z_]*$/;
