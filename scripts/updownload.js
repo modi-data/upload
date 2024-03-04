@@ -169,7 +169,7 @@ function appendErrorMessage(field, message = 'Please fill this in') {
 }
 
 function isValidFormat(value) {
-  // Regular expression to match only lowercase letters and "_"
-  var regex = /^[a-z_]+$/;
+  // Regular expression to match lowercase letter followed by lowercase letters, uppercase letters, or "_"
+  var regex = /^[a-z][a-zA-Z_]*$/;
   return regex.test(value) || value === "";
 }
