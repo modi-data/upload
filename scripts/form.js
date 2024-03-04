@@ -7,6 +7,10 @@
 function showPart(partNumber) {
     const totalParts = 4;
 
+    if (!checkFields(1)) {
+        return;
+    }
+
     for (let i = 1; i <= totalParts; i++) {
         const partElement = document.getElementById(`part${i}`);
         const shouldDisplay = i === partNumber;
@@ -81,7 +85,7 @@ function addQuestion(previousButtonId, add = true) {
     // Insert the new question before the add question button
     const button = baseQuestion.parentElement.querySelector('#add_question_button'); 
     baseQuestion.parentNode.insertBefore(newQuestion, button);
-    
+
     // If add flag is true, increase the question count and save form data
     if (add) {
         const amount = parseInt(localStorage.getItem(page)) + 1 || 1;
@@ -119,6 +123,9 @@ function addAttribute(previousButtonId, add = true) {
     // Inserting the new attribute before the add button and updating the local storage if add flag is true
     const button = leadAttribute.parentElement.querySelector('#add_Attribute_button');
     leadAttribute.parentNode.insertBefore(newAttribute, button);
+
+    const errorMessage = newAttribute.querySelector("error");
+    errorMessage.remove();
     
     if (add) {
         const amount = parseInt(localStorage.getItem(`field_${field}_Attributes`)) + 1 || 1;
@@ -151,8 +158,10 @@ function addField(previousButtonId, add = true) {
     newField.querySelector(`#field_dummy_information_dummy`).id = `field_${newFieldIdNumber}_information_1`;
     newField.querySelector(`#field_dummy_button_dummy`).id = `field_${newFieldIdNumber}_button_1`;
 
-    // Make the new field visible
+    // Make the new field visible and add requirements
     newField.style.display = '';
+    newField.querySelector(`#field_key_${newFieldIdNumber}`).classList.add('required-question');
+    newField.querySelector(`#field_key_${newFieldIdNumber}`).classList.add('required-format');
 
     // Get the descriptive element and the add field button
     const descriptive_element = document.getElementById('descriptive');
@@ -236,6 +245,10 @@ function saveFormData() {
             value = element.value;
         }
 
+        if (!value) {
+            value = "";
+        }
+
         localStorage.setItem(`form_element_${index}`, JSON.stringify(value));
     });
 }
@@ -259,10 +272,20 @@ function loadFormData() {
     }
 
     // Load and populate fields and their attributes
-    const fieldsCount = JSON.parse(localStorage.getItem('fields'));
-    for (let i = 1; i <= fieldsCount; i++) {
-        addField(`button_${i}`, false);
-        const attributesCount = JSON.parse(localStorage.getItem(`field_${i}_attributes`));
+    var fieldsCount = JSON.parse(localStorage.getItem('fields'));
+    
+    if (!fieldsCount || fieldsCount < 0) {
+        fieldsCount = 0;
+    }
+
+    const attributesCount = JSON.parse(localStorage.getItem(`field_1_Attributes`));
+    for (let j = 1; j <= attributesCount; j++) {
+        addAttribute(`field_1_button_${j}`, false);
+    }
+    
+    for (let i = 2; i <= fieldsCount + 1; i++) {
+        addField(`button_${i-1}`, false);
+        const attributesCount = JSON.parse(localStorage.getItem(`field_${i}_Attributes`));
         for (let j = 1; j <= attributesCount; j++) {
             addAttribute(`field_${i}_button_${j}`, false);
         }
@@ -302,6 +325,17 @@ function loadFormData() {
             }
         }
     });
+}
+
+function clearStored() {
+    // Display a confirmation dialog
+    var confirmed = window.confirm("Are you sure you want to clear all fields?");
+    
+    // If the user confirms, clear localStorage and reload the page
+    if (confirmed) {
+        localStorage.clear();
+        location.reload();
+    }
 }
 
 // Attach an event listener to each form element to save data when it changes

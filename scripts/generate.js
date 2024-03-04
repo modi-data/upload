@@ -154,37 +154,37 @@ ${structural}
 # generated and collected."
 descriptive:
 
-    # The descriptions can vary by data type.
-    # For each data field in your dataset, please fill out all relevant parameters from section
-    # 5.3.1 of the DSF, and enter the attributes using the "Data description item" in lower-case
-    # as the key. The following list lists the most relevant attributes from the tables, see 
-    # tables 3 to 9 in the DSF for full explanations.
-    
-    # - description
-    # - data_precision
-    # - unit
-    # - sample_rate
-    # - filter
-    # - origin
-    # - bias
-    # - type
-    # - definition
-    # - range
-    # - error_codes
-    # - quality
-    # - offset
-    # - enumeration_specification
-    # - availability
-    # - srid (for coordinates)
-    # - time_zone (for time stamps)
-    # - time_format (for time stamps)
+  # The descriptions can vary by data type.
+  # For each data field in your dataset, please fill out all relevant parameters from section
+  # 5.3.1 of the DSF, and enter the attributes using the "Data description item" in lower-case
+  # as the key. The following list lists the most relevant attributes from the tables, see 
+  # tables 3 to 9 in the DSF for full explanations.
+  
+  # - description
+  # - data_precision
+  # - unit
+  # - sample_rate
+  # - filter
+  # - origin
+  # - bias
+  # - type
+  # - definition
+  # - range
+  # - error_codes
+  # - quality
+  # - offset
+  # - enumeration_specification
+  # - availability
+  # - srid (for coordinates)
+  # - time_zone (for time stamps)
+  # - time_format (for time stamps)
 
-    # Please note the following additions to the DSF:
-    # - When dealing with coordinates, the SRID must be specified with the srid key.
-    # - When dealing with times, the time zone must be specified with the timezone key.
-    # - When dealing with dates or times, the format must be specified with the format key.
-    
-    fields:
+  # Please note the following additions to the DSF:
+  # - When dealing with coordinates, the SRID must be specified with the srid key.
+  # - When dealing with times, the time zone must be specified with the timezone key.
+  # - When dealing with dates or times, the format must be specified with the format key.
+  
+  fields:
 ${descriptive}
 `;
     }

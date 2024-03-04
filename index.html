@@ -20,13 +20,15 @@
     <div class="form-container">
 
         <h1>Metadata Generator</h1>
+        <div class="clear-button-container">
+            <button class="base-style white-style small-style" onclick="clearStored()">Clear all fields</button>
+        </div>
         This metadata format is based on the FOT-Net Data Sharing Framework (DSF).
         The DSF can be consulted if anything is unclear; each section in the format
         is directly or indirectly based on a section in the DSF
         <a target="_blank"
             href="https://www.connectedautomateddriving.eu/wp-content/uploads/2021/09/Data-Sharing-Framework-v1.1-final.pdf">
             document</a>.
-
         <br><br>
 
         <div class="form-group">
@@ -49,19 +51,19 @@
                 <div>
                     <div class="question">
                         <label class="question-label" for="filename">
-                            Filename
+                            Filename *
                             <span class="question-mark" title="Filename for the metadata file to be generated.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <input class="text-input-field" type="text" id="filename">
+                        <input class="text-input-field required-question required-format" type="text" id="filename">
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="why_was_it_collected">
-                            Why was it collected?
+                            Why was it collected? *
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field"
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question"
                             id="why_was_it_collected"></textarea>
                     </div>
 
@@ -75,16 +77,16 @@
 
                     <div class="question">
                         <label class="question-label" for="objectives">
-                            Objectives
+                            Objectives *
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="objectives"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="objectives"></textarea>
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="research_questions">
-                            Research Questions
+                            Research Questions *
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="research_questions"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="research_questions"></textarea>
                     </div>
 
                     <div class="question">
@@ -104,52 +106,52 @@
 
                     <div class="question">
                         <label class="question-label" for="contact_person_name">
-                            Contact Person Name
+                            Contact Person Name *
                             <span class="question-mark"
                                 title="A person that can be contacted for more information about this dataset.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <input class="text-input-field" type="text" id="contact_person_name">
+                        <input class="text-input-field required-question" type="text" id="contact_person_name">
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="contact_person_mail">
-                            Contact Person Mail
+                            Contact Person Mail *
                         </label><br>
-                        <input class="text-input-field" type="text" id="contact_person_mail">
+                        <input class="text-input-field required-question" type="text" id="contact_person_mail">
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="producer_of_data">
-                            Producer of Data
+                            Producer of Data *
                             <span class="question-mark" title="Which entity produced this dataset.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <input class="text-input-field" type="text" id="producer_of_data">
+                        <input class="text-input-field required-question" type="text" id="producer_of_data">
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="data_area">
-                            Data Area
+                            Data Area *
                             <span class="question-mark"
                                 title="Which are the data are from. Can be an exact coordinate, a polygon, a town name, a country name, etc. If providing coordinates/polygons, it must be encoded as WKT with an SRID of 4326.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <input class="text-input-field" type="text" id="data_area">
+                        <input class="text-input-field required-question" type="text" id="data_area">
                     </div>
 
                     <div class="question">
                         <fieldset>
-                            <legend>
-                                Data Type
+                            <legend class="question-label" >
+                                Data Type *
                                 <span class="question-mark" title="Which type of data this is.">
                                     &#x1F6C8;
                                 </span>
                             </legend>
-                            <div style="text-align: left;" class="text-input-field">
+                            <div style="text-align: left;" class="text-input-field required-question">
                                 <label><input id="data_type_1" type="checkbox" name="data_type" value="survey">
                                     Survey</label><br>
                                 <label><input id="data_type_2" type="checkbox" name="data_type" value="interviews">
@@ -196,13 +198,13 @@
 
                     <div class="question">
                         <label class="question-label" for="modi_use_case">
-                            MODI Use Case
+                            MODI Use Case *
                             <span class="question-mark"
                                 title="Which of the use cases in MODI this dataset is related to.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <select class="text-input-field" id="modi_use_case">
+                        <select class="text-input-field required-question" id="modi_use_case">
                             <option value="" disabled selected>Select an option</option>
                             <option value="UCNL">UCNL</option>
                             <option value="UCGE">UCGE</option>
@@ -215,12 +217,12 @@
 
                     <div class="question">
                         <label class="question-label" for="dataset_size">
-                            Dataset Size
+                            Dataset Size *
                             <span class="question-mark" title="An approximate description of the size of this dataset.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="dataset_size"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="dataset_size"></textarea>
                     </div>
 
                     <div class="question">
@@ -280,58 +282,58 @@
 
                     <div class="question">
                         <label class="question-label" for="unique_dataset_id">
-                            Unique dataset id
+                            Unique dataset id *
                             <span class="question-mark"
                                 title="A unique identifier for this dataset. This will be used to identify this and future updates in the metadata database, and must never be changed after the dataset has been uploaded for the first time.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <input class="text-input-field" type="text" id="unique_dataset_id">
+                        <input class="text-input-field required-question" type="text" id="unique_dataset_id">
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="rights">
-                            Who has rights to use this dataset?
+                            Who has rights to use this dataset? *
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="rights"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="rights"></textarea>
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="license">
-                            Does the dataset have a specific license for usage?
+                            Does the dataset have a specific license for usage? *
                         </label><br>
-                        <input class="text-input-field" type="text" id="license">
+                        <input class="text-input-field required-question" type="text" id="license">
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="access">
-                            Who can access the dataset?
+                            Who can access the dataset? *
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="access"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="access"></textarea>
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="constraints">
-                            Any constraints in usage of the dataset?
+                            Any constraints in usage of the dataset? *
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="constraints"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="constraints"></textarea>
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="billing">
-                            Can the dataset be used for free, or does usage incur any costs/billing for the user?
+                            Can the dataset be used for free, or does usage incur any costs/billing for the user? *
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="billing"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="billing"></textarea>
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="data_end_of_life">
-                            When the data set will stop existing?
+                            When the data set will stop existing? *
                             <span class="question-mark" title="For example due to privacy regulations.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <input class="text-input-field" type="date" id="data_end_of_life">
+                        <input class="text-input-field required-question" type="date" id="data_end_of_life">
                     </div>
 
                     <div class="question" id="process">
@@ -348,9 +350,11 @@
                         <div class="question" id="administrative_question_1">
                             <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
                                 id="delete_button" style="display: none">X</button>
-                            <input class="text-input-field" type="text" placeholder="Key"
+
+                            <input class="text-input-field required-format" type="text" placeholder="Key"
                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Key'"
                                 style="margin-bottom: 12px;" id="administrative_key_1"><br>
+
                             <textarea oninput="autoGrow(this)" class="text-input-field"
                                 placeholder="Detailed description" onfocus="this.placeholder = ''"
                                 onblur="this.placeholder = 'Detailed description'"
@@ -403,35 +407,35 @@
 
                     <div class="question">
                         <label class="question-label" for="file_format">
-                            File format
+                            File format *
                             <span class="question-mark"
                                 title="File format. Please include attributes such as delimiter for CSV, decimal separator, thousand separator (if any), and any other properties that is relevant for parsing the data.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="file_format"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="file_format"></textarea>
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="file_structure">
-                            File structure
+                            File structure *
                             <span class="question-mark"
                                 title="Please describe the storage structure of the data. If it consists of flat files, the folder structure and file naming can be relevant. If it is a database, a description of the relevant tables, indices, triggers and views is important.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="file_structure"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="file_structure"></textarea>
                     </div>
 
                     <div class="question">
                         <label class="question-label" for="required_tools">
-                            Required tools
+                            Required tools *
                             <span class="question-mark"
                                 title="Which tools can be used to read the data. Especially important for non-standard formats.">
                                 &#x1F6C8;
                             </span>
                         </label><br>
-                        <textarea oninput="autoGrow(this)" class="text-input-field" id="required_tools"></textarea>
+                        <textarea oninput="autoGrow(this)" class="text-input-field required-question" id="required_tools"></textarea>
                     </div>
 
                     <div class="question">
@@ -450,13 +454,19 @@
                             Additional keys and values can be added here if this is a non-standard format that requires
                             a more detailed explanation.<br>
                             Keep in mind that each key should be unique, contain no spaces and be lowercase.
+                            <span class="question-mark"
+                                title="Only the fields where both the key and values are filled in are added.">
+                                &#x1F6C8;
+                            </span>
                         </p>
                         <div class="question" id="structural_question_1">
                             <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
                                 id="delete_button" style="display: none">X</button>
-                            <input class="text-input-field" type="text" placeholder="Key"
+
+                            <input class="text-input-field required-format" type="text" placeholder="Key"
                                 onfocus="this.placeholder = ''" onblur="this.placeholder = 'Key'"
                                 style="margin-bottom: 12px;" id="structural_key_1"><br>
+                                
                             <textarea oninput="autoGrow(this)" class="text-input-field"
                                 placeholder="Detailed description" onfocus="this.placeholder = ''"
                                 onblur="this.placeholder = 'Detailed description'"
@@ -532,8 +542,10 @@
                     <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
                         id="delete_button">X</button>
 
-                    <input class="text-input-field" type="text" placeholder="Field" onfocus="this.placeholder = ''"
+                    <input class="text-input-field" type="text" placeholder="Field" 
+                        onfocus="this.placeholder = ''"
                         onblur="this.placeholder = 'Field'" style="margin-bottom: 12px;" id="field_key_dummy"><br>
+
                     <textarea oninput="autoGrow(this)" class="text-input-field" placeholder="Description"
                         onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'"
                         id="field_description_dummy"></textarea>
@@ -541,6 +553,7 @@
                     <div class="question" id="field_dummy_Attribute_dummy">
                         <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
                             id="delete_button" style="display: none">X</button>
+
                         <select class="text-input-field" id="field_dummy_key_dummy" style="margin-bottom: 12px;">
                             <option value="" disabled selected>Select an Attribute</option>
                             <option value="data_precision">Data precision</option>
@@ -548,7 +561,8 @@
                             <option value="sample_rate">Sample rate</option>
                             <option value="filter">Filter</option>
                             <option value="origin">Origin</option>
-                            <option value="Type">Type</option>
+                            <option value="type">Type</option>
+                            <option value="timezone">Timezone</option>
                             <option value="range">Range</option>
                             <option value="error_codes">Error codes </option>
                             <option value="quality">Quality</option>
@@ -581,14 +595,18 @@
 
                 <div id="descriptive" style="margin-bottom: 12px;">
                     <div class="question" id="field_1">
-                        <input class="text-input-field" type="text" placeholder="Field" onfocus="this.placeholder = ''"
+                        <input class="text-input-field required-format required-question" type="text" 
+                            placeholder="Field" onfocus="this.placeholder = ''"
                             onblur="this.placeholder = 'Field'" style="margin-bottom: 12px;" id="field_key_1"><br>
+
                         <textarea oninput="autoGrow(this)" class="text-input-field" placeholder="Description"
                             onfocus="this.placeholder = ''" onblur="this.placeholder = 'Description'"
                             id="field_description_1"></textarea>
+
                         <div class="question" id="field_1_Attribute_1">
                             <button class="base-style standard-style big-style deleteButton" onclick="deleteParent()"
                                 id="delete_button" style="display: none">X</button>
+
                             <select class="text-input-field" id="field_1_key_1" style="margin-bottom: 12px;">
                                 <option value="" disabled selected>Select an Attribute</option>
                                 <option value="data_precision">Data precision</option>
