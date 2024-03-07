@@ -410,7 +410,7 @@ function generateProcesses() {
 
         if (keyElement && descriptionElement) {
             const key = keyElement.value;
-            const description = descriptionElement.value;
+            const description = splitTextByLength(descriptionElement.value, 85);
 
             // Check if both key and description have values before adding to the process object
             if (key.trim() !== '' && description.trim() !== '') {
@@ -468,7 +468,7 @@ function generateStructural() {
 
         if (keyElement && descriptionElement) {
             const key = keyElement.value;
-            const description = descriptionElement.value;
+            const description = splitTextByLength(descriptionElement.value, 85);
 
             // Check if both key and description have values before adding to the process object
             if (key.trim() !== '' && description.trim() !== '') {
