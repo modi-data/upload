@@ -98,7 +98,7 @@ function checkFields(partNumber) {
 
   // Check if the required fields are filled in
   requiredFields.forEach(function (field) {
-    if (field.tagName.toLowerCase() === 'input') {
+    if (field.tagName.toLowerCase() === 'input' || field.tagName.toLowerCase() === 'textarea') {
       if (field.type === 'checkbox') {
         if (!document.querySelector('input[name="' + field.name + '"]:checked')) {
           falses.push(field);

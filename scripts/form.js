@@ -49,7 +49,8 @@ function updateProgressBar(currentStep) {
  * @return {void} 
  */
 function autoGrow(elem) {
-    elem.style.height = Math.max(elem.scrollHeight + 5, 42) + "px";
+    elem.style.height = "auto";
+    elem.style.height = (elem.scrollHeight + 5) + "px";
 }
 
 /**
