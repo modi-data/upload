@@ -63,7 +63,7 @@ function uploadYAMLFile(metadataType) {
   const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=${scope}&state=${filename}`;
 
 
-  fetch('http://localhost:3000/fileUpload', {
+  fetch('http://carnas.ele.tue.nl:3000/fileUpload', {
     method: 'POST',
     body: JSON.stringify({
       content: content,
