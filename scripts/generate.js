@@ -91,7 +91,6 @@ ${descriptive}
     return yamlContent;
 }
 
-/**
  * Generate a YAML file with metadata based on the provided metadata type and summary.
  * 
  * @param {string} metadataType - The type of metadata: "Administrative", "Structural", or "Descriptive".
