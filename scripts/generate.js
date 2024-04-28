@@ -270,9 +270,11 @@ function generateSummary() {
             case 'web_address':
                 comment =
                     '  # A web address to download the data if applicable.';
+                break;
             case 'producer_of_data':
                 comment =
                     '  # Which entity produced this dataset.';
+                break;
             case 'DOI':
                 comment =
                     '  # Data set DOI if applicable';
@@ -304,6 +306,7 @@ function generateSummary() {
                     '  # A tiny sample of the dataset to show how it looks (if possible).';
                 break;
         }
+        console.log(key, value, comment);
 
         // New line after comments
         if (comment != '') {
