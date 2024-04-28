@@ -247,7 +247,9 @@ function generateSummary() {
         experimental_plan: splitTextByLength(document.getElementById('experimental_plan').value, 85),
         sample_selection_criteria: splitTextByLength(document.getElementById('sample_selection_criteria').value, 85),
         contact_person: splitTextByLength(document.getElementById("contact_person_name").value + ', ' + document.getElementById("contact_person_mail").value, 85),
+        web_address: splitTextByLength(document.getElementById('web_address').value, 85),
         producer_of_data: splitTextByLength(document.getElementById('producer_of_data').value, 85),
+        DOI: splitTextByLength(document.getElementById('DOI').value, 85),
         data_area: splitTextByLength(document.getElementById('data_area').value, 85),
         data_type: splitTextByLength(Array.from(document.querySelectorAll('input[name="data_type"]:checked')).map(checkbox => checkbox.value).join(', '), 85),
         modi_use_case: splitTextByLength(document.getElementById('modi_use_case').value, 85),
@@ -265,9 +267,15 @@ function generateSummary() {
                 comment =
                     '  # A person that can be contacted for more information about this dataset.';
                 break;
+            case 'web_address':
+                comment =
+                    '  # A web address to download the data if applicable.';
             case 'producer_of_data':
                 comment =
                     '  # Which entity produced this dataset.';
+            case 'DOI':
+                comment =
+                    '  # Data set DOI if applicable';
                 break;
             case 'data_area':
                 comment =
