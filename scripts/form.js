@@ -7,8 +7,10 @@
 function showPart(partNumber) {
     const totalParts = 4;
 
-    if (!checkFields(1)) {
-        return;
+    for (i = 1; i < partNumber; i++) {
+        if (!checkFields(i)) {
+            return;
+        }
     }
 
     for (let i = 1; i <= totalParts; i++) {

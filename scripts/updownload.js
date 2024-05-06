@@ -1,24 +1,14 @@
-const mapping = {
-  'Administrative': 2,
-  'Structural': 3,
-  'Descriptive': 4
-};
-
 /**
  * Download a YAML file based on the given metadata type
- * 
- * @param {string} metadataType - The type of metadata to be used for generating the YAML file
- * @returns {void}
  */
-function downloadYAMLFile(metadataType) {
+function downloadYAMLFile() {
   // Check if the form is properly filled.
-  partNumber = mapping[metadataType];
-  if (!checkFields(partNumber)) {
+  if (!checkFields(4)) {
     return;
   }
 
   // Generate the YAML content based on the metadata type and summary
-  const yamlContent = generateFile(metadataType);
+  const yamlContent = generateYAMLFile();
 
   // Set the filename and content type for the downloaded file
   const filename = document.getElementById('filename').value + ".yml";
@@ -45,17 +35,15 @@ function downloadYAMLFile(metadataType) {
 
 /**
  * Uploads a YAML file to a server and opens the GitHub OAuth authorization page.
- * @param {string} metadataType - The type of metadata.
  */
-function uploadYAMLFile(metadataType) {
+function uploadYAMLFile() {
   // Check if the form is properly filled.
-  partNumber = mapping[metadataType];
-  if (!checkFields(partNumber)) {
+  if (!checkFields(4)) {
     return;
   }
 
   // Generate the YAML content based on the metadata type and summary
-  const content = generateFile(metadataType);
+  const content = generateYAMLFile();
   const filename = document.getElementById('filename').value;
 
   const clientId = 'a8dab0a79e2c49379d8a';
@@ -135,7 +123,7 @@ function checkFields(partNumber) {
   if (falses.length === 0) {
     return true;
   } else {
-    alert('Please fill in all required fields correctly.');
+    alert('Please fill in all required fields in all previous sections correctly.');
     // Highlighting the fields with red border
     falses.forEach(function (field) {
       if (field.tagName.toLowerCase() === 'input' || field.tagName.toLowerCase() === 'select') {
