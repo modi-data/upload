@@ -6,7 +6,7 @@
  */
 function generateYAMLFile() {
     // Get all the metadata
-    const summary = generateSummray()
+    const summary = generateSummary()
     const administrative = generateAdministrative()
     const process = generateProcesses()
     const structural = generateStructural()
