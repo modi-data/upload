@@ -11,7 +11,7 @@ function downloadYAMLFile() {
   const yamlContent = generateYAMLFile();
 
   // Set the filename and content type for the downloaded file
-  const filename = document.getElementById('filename').value + ".yml";
+  const filename = document.getElementById('unique_dataset_id').value + ".yml";
   const contentType = 'text/yaml';
 
   // Create a Blob containing the YAML content with the specified content type
