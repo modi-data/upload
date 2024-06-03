@@ -44,7 +44,7 @@ function uploadYAMLFile() {
 
   // Generate the YAML content based on the metadata type and summary
   const content = generateYAMLFile();
-  const filename = document.getElementById('filename').value;
+  const filename = document.getElementById("unique_dataset_id").value;
 
   const clientId = 'a8dab0a79e2c49379d8a';
   const scope = 'repo';
