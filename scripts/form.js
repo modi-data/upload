@@ -52,7 +52,7 @@ function updateProgressBar(currentStep) {
  */
 function autoGrow(elem) {
     elem.style.height = "auto";
-    elem.style.height = (elem.scrollHeight + 5) + "px";
+    elem.style.height = max((elem.scrollHeight + 5), 21) + "px";
 }
 
 /**
