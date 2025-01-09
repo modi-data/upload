@@ -38,12 +38,6 @@ The MODI Metadata Generator is a form-based web application that guides users th
   - `MODIicon.png` - MODI project logo
 - `Modi Data Upload.zip` - The Docker based JavaScript Server.
 
-## Setup and Installation
-
-1. Clone the repository
-2. For local development, serve the files using any HTTP server
-3. For production deployment, ensure the Docker backend is properly configured
-
 ### Backend Server Setup
 
 The backend server is required for GitHub integration and file uploads. Please contact the server administrator for access and configuration details.
