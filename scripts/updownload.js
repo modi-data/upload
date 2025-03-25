@@ -50,7 +50,7 @@ function uploadYAMLFile() {
   const scope = 'repo';
   const oauthUrl = `https://github.com/login/oauth/authorize?client_id=${clientId}&scope=${scope}&state=${filename}`;
 
-  fetch('https://modi-metadata.ele.tue.nl/fileUpload', {
+  fetch('https://modi-metadata.ele.tue.nl/MODI/fileUpload', {
   //fetch('http://localhost:3000/fileUpload', {
     method: 'POST',
     body: JSON.stringify({
