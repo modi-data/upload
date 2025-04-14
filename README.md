@@ -77,7 +77,7 @@ Das, Anwesha
 - Easy navigation between sections
 
 ## Architecture
-[Alt text](Modi-Architecture.drawio.png)
+![Alt text](Modi-Architecture.drawio.png)
 
 ## Resources
 
