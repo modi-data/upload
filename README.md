@@ -76,6 +76,9 @@ Das, Anwesha
 - Section completion indicators
 - Easy navigation between sections
 
+## Architecture
+[Alt text](Modi-Architecture.drawio.png)
+
 ## Resources
 
 - [FOT-Net Data Sharing Framework Documentation](https://www.connectedautomateddriving.eu/wp-content/uploads/2021/09/Data-Sharing-Framework-v1.1-final.pdf)
