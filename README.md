@@ -77,6 +77,7 @@ Das, Anwesha
 - Easy navigation between sections
 
 ## Architecture
+This repository represents the upload section of the architecture diplayed below. As displayed, the upload site is a static site which enables contributors to easily upload metadata files using an easy to use form. The upload site sends the metadata file to the authentication server, which in turn sends the file to the modi-metadata repository where it is stored.
 ![Alt text](Modi-Architecture.drawio.png)
 
 ## Resources
